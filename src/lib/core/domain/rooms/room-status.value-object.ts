@@ -5,7 +5,7 @@ import { fromZodError } from 'zod-validation-error';
 export const RoomStatusSchema = z.discriminatedUnion('label', [
     z.object({ label: z.literal('preparing') }),
     z.object({ label: z.literal('ready') }),
-    z.object({ label: z.literal('closed') }),
+    z.object({ label: z.literal('locked') }),
 ]);
 
 export type RoomStatusProps = z.infer<typeof RoomStatusSchema>

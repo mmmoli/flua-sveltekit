@@ -1,9 +1,9 @@
 import { Fail, Ok, type IResult, type IUseCase } from 'rich-domain';
-import type { CreateRoomUseCaseDTO } from './create-room-use-case-dto';
+import type { RequestRoomUseCaseDTO } from './request-room-use-case-dto';
 import { RoomBuilder } from '$lib/core/domain/rooms';
 
-export class CreateRoomUseCase implements IUseCase<CreateRoomUseCaseDTO, IResult<void>> {
-    async execute(dto: CreateRoomUseCaseDTO): Promise<IResult<void>> {
+export class RequestRoomUseCase implements IUseCase<RequestRoomUseCaseDTO, IResult<void>> {
+    async execute(dto: RequestRoomUseCaseDTO): Promise<IResult<void>> {
         try {
             const roomResult = new RoomBuilder({
                 ownerId: dto.ownerId

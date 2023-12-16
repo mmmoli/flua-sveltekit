@@ -28,12 +28,12 @@ export class Room extends Aggregate<RoomProps>{
         return this.props.status;
     }
 
-    public close() {
-        const closedStatus = RoomStatus.create({
-            label: 'closed'
+    public lock() {
+        const lockedStatus = RoomStatus.create({
+            label: 'locked'
         }).value()
 
-        this.change('status', closedStatus)
+        this.change('status', lockedStatus)
         this.addEvent(new RoomClosedEvent())
     }
 

@@ -1,21 +1,21 @@
 import { Fail, Ok, type IResult, type IUseCase } from 'rich-domain';
-import type { CloseRoomUseCaseDTO } from './close-room-use-case-dto';
+import type { LockRoomUseCaseDTO } from './lock-room-use-case-dto';
 import { type RoomRepoTrait } from '$lib/core/domain/rooms';
 
-export interface CloseRoomUseCaseDeps {
+export interface LockRoomUseCaseDeps {
     roomRepo: RoomRepoTrait;
 }
 
-export class CloseRoomUseCase implements IUseCase<CloseRoomUseCaseDTO, IResult<void>> {
+export class LockRoomUseCase implements IUseCase<LockRoomUseCaseDTO, IResult<void>> {
 
-    constructor(protected readonly deps: CloseRoomUseCaseDeps) { }
+    constructor(protected readonly deps: LockRoomUseCaseDeps) { }
 
-    async execute(dto: CloseRoomUseCaseDTO): Promise<IResult<void>> {
+    async execute(dto: LockRoomUseCaseDTO): Promise<IResult<void>> {
         try {
             const roomResult = await this.deps.roomRepo.fetchById(dto.roomId)
             if (roomResult.isFail()) return Fail(roomResult.error())
             const room = roomResult.value()
-            room.close()
+            room.lock()
             room.dispatchAll()
             return Ok()
         } catch (error) {
