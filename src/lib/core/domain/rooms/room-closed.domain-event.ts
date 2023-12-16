@@ -1,11 +1,11 @@
 import type { IDomainEvent, IHandle } from "rich-domain";
 import type { Room } from "./room.aggregate-root";
 
-export class RoomClosed implements IHandle<Room>{
+export class RoomClosedEvent implements IHandle<Room>{
     public eventName: string;
 
     constructor() {
-        this.eventName = 'RoomClosed';
+        this.eventName = 'RoomClosedEvent';
     }
 
     dispatch(event: IDomainEvent<Room>): void {

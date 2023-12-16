@@ -1,6 +1,7 @@
 import { expect, test, describe, beforeEach } from 'vitest'
 import { RoomBuilder } from './room.builder'
 import { RoomName } from './room-name.value-object'
+import { RoomStatus } from './room-status.value-object'
 
 describe('RoomBuilder', () => {
 
@@ -31,5 +32,13 @@ describe('RoomBuilder', () => {
         }).withName(nameStr)
         const room = builder.build().value()
         expect(room.get('name').isEqual(name)).toBeTruthy()
+    })
+
+    test('can set an status', () => {
+        const status = RoomStatus.create({
+            label: 'closed'
+        }).value()
+        const room = builder.withStatus(status).build().value()
+        expect(room.status.isEqual(status)).toBeTruthy()
     })
 })
