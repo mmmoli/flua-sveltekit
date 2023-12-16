@@ -9,4 +9,9 @@ export class RoomService implements RoomServiceTrait {
             namespace: 'fake-namespace',
         })
     }
+
+    async destroy(room: Room): Promise<IResult<void>> {
+        console.info('RoomService.destroy', room)
+        return Ok()
+    }
 }

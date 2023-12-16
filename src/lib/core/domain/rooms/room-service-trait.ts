@@ -8,4 +8,5 @@ export interface RoomDetails {
 
 export interface RoomServiceTrait {
     create(room: Room): Promise<IResult<RoomDetails>>
+    destroy(room: Room): Promise<IResult<void>>
 }

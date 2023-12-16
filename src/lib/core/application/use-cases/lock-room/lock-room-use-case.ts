@@ -1,9 +1,10 @@
-import { Fail, Ok, type IResult, type IUseCase } from 'rich-domain';
+import { Fail, Ok, type IResult, type IUseCase, type EventHandler } from 'rich-domain';
 import type { LockRoomUseCaseDTO } from './lock-room-use-case-dto';
-import { type RoomRepoTrait } from '$lib/core/domain/rooms';
+import { RoomLockedEvent, type Room, type RoomRepoTrait } from '$lib/core/domain/rooms';
 
 export interface LockRoomUseCaseDeps {
     roomRepo: RoomRepoTrait;
+    roomLockedPolicy?: EventHandler<Room, void>
 }
 
 export class LockRoomUseCase implements IUseCase<LockRoomUseCaseDTO, IResult<void>> {
@@ -16,7 +17,7 @@ export class LockRoomUseCase implements IUseCase<LockRoomUseCaseDTO, IResult<voi
             if (roomResult.isFail()) return Fail(roomResult.error())
             const room = roomResult.value()
             room.lock()
-            room.dispatchAll()
+            room.dispatchEvent(RoomLockedEvent.name, this.deps?.roomLockedPolicy)
             return Ok()
         } catch (error) {
             console.log(error)

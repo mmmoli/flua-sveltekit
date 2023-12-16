@@ -1,9 +1,14 @@
-import type { Room } from "$lib/core/domain/rooms";
+import type { Room, RoomServiceTrait } from "$lib/core/domain/rooms";
 import { type EventHandler, type HandlerPayload } from "rich-domain";
 
-export class RoomClosedPolicy implements EventHandler<Room, void>{
+export interface RoomLockedPolicyDeps {
+    roomService: RoomServiceTrait
+}
+export class RoomLockedPolicy implements EventHandler<Room, void>{
+    constructor(protected readonly deps: RoomLockedPolicyDeps) { }
+
     async execute(data: HandlerPayload<Room>): Promise<void> {
-        throw new Error("Method not implemented.");
+        console.log('RoomRequestPolicy')
     }
 }
 
