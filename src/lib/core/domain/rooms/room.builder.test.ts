@@ -36,7 +36,7 @@ describe('RoomBuilder', () => {
 
     test('can set an status', () => {
         const status = RoomStatus.create({
-            label: 'closed'
+            label: 'locked'
         }).value()
         const room = builder.withStatus(status).build().value()
         expect(room.status.isEqual(status)).toBeTruthy()
