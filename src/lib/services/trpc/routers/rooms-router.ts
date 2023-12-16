@@ -7,7 +7,9 @@ import { throwTRPCError } from "../utils";
 export const rooms = t.router({
 	request: t.procedure
 		.use(auth)
-		.input(RequestRoomUseCaseSchema)
+		.input(RequestRoomUseCaseSchema.omit({
+			ownerId: true,
+		}))
 		.mutation(async ({ ctx: { auth: { userId } }, input }) => {
 			const result = await requestRoomUseCase.execute({
 				...input,

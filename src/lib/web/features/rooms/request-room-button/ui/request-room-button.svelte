@@ -1,6 +1,14 @@
 <script lang="ts">
-	const handleClick = (_event: MouseEvent) => {
-		console.log('Request Room');
+	import { page } from '$app/stores';
+	import { createMutation } from '../api/mutation';
+	const mutation = createMutation($page);
+
+	const handleClick = () => {
+		$mutation.mutate({
+			name: {
+				value: 'My Awesome Room'
+			}
+		});
 	};
 </script>
 
