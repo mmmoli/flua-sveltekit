@@ -1,8 +1,12 @@
-import { Fail, Ok, type IResult, type IUseCase } from 'rich-domain';
+import { Fail, Ok, type IResult, type IUseCase, type EventHandler } from 'rich-domain';
 import type { RequestRoomUseCaseDTO } from './request-room-use-case-dto';
-import { RoomBuilder } from '$lib/core/domain/rooms';
+import { Room, RoomBuilder } from '$lib/core/domain/rooms';
 
+export interface RequestRoomUseCaseDeps {
+    roomRequestPolicy?: EventHandler<Room, void>
+}
 export class RequestRoomUseCase implements IUseCase<RequestRoomUseCaseDTO, IResult<void>> {
+    constructor(protected readonly deps?: RequestRoomUseCaseDeps) { }
     async execute(dto: RequestRoomUseCaseDTO): Promise<IResult<void>> {
         try {
             const roomResult = new RoomBuilder({
@@ -10,7 +14,7 @@ export class RequestRoomUseCase implements IUseCase<RequestRoomUseCaseDTO, IResu
             }).withName(dto.name.value).build()
             if (roomResult.isFail()) return Fail(roomResult.error())
             const room = roomResult.value()
-            room.dispatchAll()
+            room.dispatchEvent('RoomRequestedEvent', this.deps?.roomRequestPolicy)
             return Ok()
         } catch (error) {
             console.log(error)

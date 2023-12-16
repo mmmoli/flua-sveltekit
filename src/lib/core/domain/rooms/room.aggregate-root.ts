@@ -1,7 +1,8 @@
 import { Aggregate, type UID, type IResult, Ok } from "rich-domain";
-import type { RoomName } from "./room-name.value-object";
-import { RoomClosedEvent, RoomCreatedEvent } from ".";
+import { RoomLockedEvent } from "./room-locked.domain-event";
+import { RoomRequestedEvent } from "./room-requested.domain-event";
 import { RoomStatus } from "./room-status.value-object";
+import type { RoomName } from "./room-name.value-object";
 
 export interface RoomProps {
     id?: UID;
@@ -15,7 +16,7 @@ export class Room extends Aggregate<RoomProps>{
     private constructor(props: RoomProps) {
         super(props);
         if (props.id?.isNew()) {
-            this.addEvent(new RoomCreatedEvent())
+            this.addEvent(new RoomRequestedEvent())
         }
     }
 
@@ -34,7 +35,7 @@ export class Room extends Aggregate<RoomProps>{
         }).value()
 
         this.change('status', lockedStatus)
-        this.addEvent(new RoomClosedEvent())
+        this.addEvent(new RoomLockedEvent())
     }
 
 }

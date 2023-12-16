@@ -1,16 +1,25 @@
-import { RoomCreationPolicy } from "../application/policies";
-import { LockRoomUseCase, RequestRoomUseCase } from "../application/use-cases";
+import { RoomRequestPolicy } from "../application/policies";
+import { LockRoomUseCase, RequestRoomUseCase, type LockRoomUseCaseDTO, type RequestRoomUseCaseDTO } from "../application/use-cases";
 import { RoomRepo } from "./db/room-repo";
 import { RoomService } from "./services/room-service";
 
 const roomService = new RoomService();
 const roomRepo = new RoomRepo();
 
-export const createRoomUseCase = new RequestRoomUseCase()
-export const lockRoomUseCase = new LockRoomUseCase({
-    roomRepo
+const createRoomUseCase = new RequestRoomUseCase({
+    roomRequestPolicy: new RoomRequestPolicy({
+        roomService
+    })
 })
 
-new RoomCreationPolicy({
-    roomService
+export const createRoom = async (dto: RequestRoomUseCaseDTO) => {
+    createRoomUseCase.execute(dto).then()
+}
+
+const lockRoomUseCase = new LockRoomUseCase({
+    roomRepo
 })
+export const lockRoom = async (dto: LockRoomUseCaseDTO) => {
+    lockRoomUseCase.execute(dto).then()
+}
+
