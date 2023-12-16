@@ -1,0 +1,1 @@
+ALTER TABLE "rooms" ALTER COLUMN "owner_id" SET DATA TYPE varchar;

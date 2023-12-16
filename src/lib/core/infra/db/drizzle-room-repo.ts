@@ -23,7 +23,8 @@ export class DrizzleRoomRepo implements RoomRepoTrait {
                 .onConflictDoUpdate({
                     target: rooms.id,
                     set: {
-                        ...model
+                        name: model.name,
+                        ownerId: model.ownerId
                     }
                 });
             return Ok();

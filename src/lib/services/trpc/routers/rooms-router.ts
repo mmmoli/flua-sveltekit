@@ -11,7 +11,6 @@ export const rooms = t.router({
 			ownerId: true,
 		}))
 		.mutation(async ({ ctx: { auth: { userId } }, input }) => {
-			console.log("userId", userId)
 			const result = await requestRoomUseCase.execute({
 				...input,
 				ownerId: userId,

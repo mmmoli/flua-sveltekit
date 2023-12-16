@@ -15,6 +15,13 @@
       "when": 1702762537019,
       "tag": "0001_lethal_tarantula",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1702769891602,
+      "tag": "0002_square_dexter_bennett",
+      "breakpoints": true
     }
   ]
 }
