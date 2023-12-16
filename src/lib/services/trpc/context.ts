@@ -7,7 +7,7 @@ import type { inferAsyncReturnType } from "@trpc/server";
 export async function createContext(event: RequestEvent) {
 	return {
 		auth: {
-			userId: "abc",
+			userId: event.locals.session?.userId as string,
 		},
 	};
 }
