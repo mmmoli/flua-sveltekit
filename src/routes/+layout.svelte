@@ -1,6 +1,11 @@
 <script lang="ts">
 	import '../app.pcss';
-	import { MainLayout } from '$lib/web/app/layouts';
+	import { QueryClientProvider } from '@tanstack/svelte-query';
+	import type { LayoutData } from './$types';
+
+	export let data: LayoutData;
 </script>
 
-<MainLayout><slot /></MainLayout>
+<QueryClientProvider client={data.queryClient}>
+	<slot />
+</QueryClientProvider>

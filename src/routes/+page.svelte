@@ -1,5 +1,3 @@
-<script lang="ts">
-	import { DashPage } from '$lib/web/pages/dash';
-</script>
+<h1>Home</h1>
 
-<DashPage />
+<p>You want <a href="dash/">Dashboard</a></p>
