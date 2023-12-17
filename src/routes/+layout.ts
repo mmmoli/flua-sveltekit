@@ -1,15 +1,1 @@
-import { browser } from '$app/environment'
-import { QueryClient } from '@tanstack/svelte-query'
-
-export const load = async () => {
-    console.log(`+layout.ts load`)
-    const queryClient = new QueryClient({
-        defaultOptions: {
-            queries: {
-                enabled: browser,
-            },
-        },
-    })
-
-    return { queryClient }
-}
+export { load } from '$lib/web/app/layouts/main-layout/api/layout'
