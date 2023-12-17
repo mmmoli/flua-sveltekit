@@ -1,9 +1,6 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { createQuery } from '../api/query';
-	const query = createQuery($page);
+	import type { RouterOutputs } from '$lib/services/trpc/router';
+	export let rooms: RouterOutputs['rooms']['listForOwnerId'];
 </script>
 
-{#if $query.data}
-	<pre>{JSON.stringify($query.data, null, 2)}</pre>
-{/if}
+<pre>{JSON.stringify(rooms, null, 2)}</pre>

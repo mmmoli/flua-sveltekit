@@ -1,10 +1,6 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { createQuery } from '../api/query';
-	const query = createQuery($page);
+	import type { RouterOutputs } from '$lib/services/trpc/router';
+	export let rooms: RouterOutputs['rooms']['listForOwnerId'];
 </script>
 
-{#if $query.isLoading}<p>…</p>
-{:else if $query.data}
-	<p>{$query.data?.length}</p>
-{/if}
+<p>{rooms.length}</p>
