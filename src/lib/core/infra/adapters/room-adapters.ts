@@ -9,6 +9,14 @@ export class RoomToDbAdapter implements IAdapter<Room, DbRoom> {
 	}
 }
 
+export type RoomModel = Readonly<DbRoom>
+export class RoomToInfraAdapter implements IAdapter<Room, RoomModel> {
+	build(input: Room): IResult<DbRoom> {
+		const data = input.toObject()
+		return Ok(data);
+	}
+}
+
 export class DbToRoomAdapter implements IAdapter<DbRoom, Room> {
 	build(input: DbRoom): IResult<Room> {
 		const builder = new RoomBuilder({ ownerId: input.ownerId })

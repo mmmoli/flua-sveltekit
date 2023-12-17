@@ -1,0 +1,1 @@
+CREATE INDEX IF NOT EXISTS "owner_idx" ON "rooms" ("owner_id");

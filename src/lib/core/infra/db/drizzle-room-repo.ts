@@ -1,4 +1,4 @@
-import { Fail, Ok, type IResult, type IAdapter } from 'rich-domain';
+import { Fail, Ok, type IResult, type IAdapter, Combine } from 'rich-domain';
 import { rooms, type DbRoom } from '$lib/server/services/drizzle/schemas';
 import { type Room, type RoomRepoTrait } from '$lib/core/domain/rooms';
 import type { Db } from '$lib/server/services/drizzle';
@@ -11,6 +11,23 @@ export interface DrizzleRoomRepoDeps {
 
 export class DrizzleRoomRepo implements RoomRepoTrait {
     constructor(protected readonly deps: DrizzleRoomRepoDeps) { }
+
+    async fetchListForOwnerId(ownerId: string): Promise<IResult<Room[]>> {
+        try {
+            const queryResult = await this.deps.db.query.rooms.findMany({
+                where: (room, { eq }) => eq(room.ownerId, ownerId)
+            })
+            if (queryResult.length === 0) return Ok([])
+            const roomResults = queryResult.map(room => this.deps.toDomain.build(room))
+            if (Combine(roomResults).isFail()) return Fail('Failed to fetch a room')
+            const rooms = roomResults.map(result => result.value())
+            return Ok(rooms)
+
+        } catch (error) {
+            console.error(JSON.stringify(error, null, 2));
+            return Fail('Failed to fetch rooms');
+        }
+    }
 
     async save(room: Room): Promise<IResult<void>> {
         const modelResult = this.deps.toInfra.build(room);
