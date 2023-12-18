@@ -1,8 +1,9 @@
-import { Aggregate, type UID, type IResult, Ok } from "rich-domain";
-import { RoomLockedEvent } from "./room-locked.domain-event";
-import { RoomRequestedEvent } from "./room-requested.domain-event";
-import { RoomStatus } from "./room-status.value-object";
-import type { RoomName } from "./room-name.value-object";
+import { Aggregate, type UID, type IResult, Ok } from 'rich-domain';
+import { RoomLockedEvent } from './room-locked.domain-event';
+import { RoomRequestedEvent } from './room-requested.domain-event';
+import { RoomStatus, type RoomReadyStatus } from './room-status.value-object';
+import type { RoomName } from './room-name.value-object';
+import { RoomReadyEvent } from './room-ready.domain-event';
 
 export interface RoomProps {
     id?: UID;
@@ -11,12 +12,11 @@ export interface RoomProps {
     status: RoomStatus;
 }
 
-export class Room extends Aggregate<RoomProps>{
-
+export class Room extends Aggregate<RoomProps> {
     private constructor(props: RoomProps) {
         super(props);
         if (props.id?.isNew()) {
-            this.addEvent(new RoomRequestedEvent())
+            this.addEvent(new RoomRequestedEvent());
         }
     }
 
@@ -25,18 +25,26 @@ export class Room extends Aggregate<RoomProps>{
         return Ok(room);
     }
 
-    get status(): RoomStatus {
+    public get status(): RoomStatus {
         return this.props.status;
+    }
+
+    public ready(opts: Omit<RoomReadyStatus, 'label'>) {
+        const lockedStatus = RoomStatus.create({
+            label: 'ready',
+            ...opts
+        }).value();
+
+        this.change('status', lockedStatus);
+        this.addEvent(new RoomReadyEvent());
     }
 
     public lock() {
         const lockedStatus = RoomStatus.create({
             label: 'locked'
-        }).value()
+        }).value();
 
-        this.change('status', lockedStatus)
-        this.addEvent(new RoomLockedEvent())
+        this.change('status', lockedStatus);
+        this.addEvent(new RoomLockedEvent());
     }
-
 }
-
