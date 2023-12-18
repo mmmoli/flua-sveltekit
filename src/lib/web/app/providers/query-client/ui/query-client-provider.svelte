@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
+	import { QueryClientProvider } from '@tanstack/svelte-query';
 	import { SvelteQueryDevtools } from '@tanstack/svelte-query-devtools';
-	export let queryClient: QueryClient;
+	import { queryClient } from '../lib/query-client';
 </script>
 
 <QueryClientProvider client={queryClient}>
