@@ -4,12 +4,14 @@ import { RoomRequestedEvent } from './room-requested.domain-event';
 import { RoomStatus, type RoomReadyStatus } from './room-status.value-object';
 import type { RoomName } from './room-name.value-object';
 import { RoomReadyEvent } from './room-ready.domain-event';
+import type { RoomDescription } from './room-description.value-object';
 
 export interface RoomProps {
 	id?: UID;
 	name: RoomName;
 	ownerId: UID;
 	status: RoomStatus;
+	description?: RoomDescription;
 }
 
 export class Room extends Aggregate<RoomProps> {

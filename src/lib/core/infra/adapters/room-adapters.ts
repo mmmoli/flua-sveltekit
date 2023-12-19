@@ -37,6 +37,7 @@ export class RoomToInfraAdapter implements IAdapter<Room, RoomModel> {
 			name: input.get('name').get('value'),
 			ownerId: input.get('ownerId').value(),
 			status: input.get('status').get('label'),
+			description: input.get('description')?.get('value') ?? null,
 			metadata
 		};
 
@@ -54,7 +55,13 @@ export class DbToRoomAdapter implements IAdapter<DbRoom, Room> {
 		});
 		if (parseStatus.success === false) return Fail('Validation failed');
 		const statusProps = parseStatus.data;
-		const result = builder.withId(input.id).withName(input.name).withStatus(statusProps).build();
+		builder.withId(input.id).withName(input.name).withStatus(statusProps);
+
+		if (input.description) {
+			builder.withDescription(input.description);
+		}
+
+		const result = builder.build();
 		if (result.isFail()) return Fail(result.error());
 		const room = result.value();
 		return Ok(room);

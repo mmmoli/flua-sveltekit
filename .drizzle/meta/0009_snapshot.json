@@ -1,0 +1,77 @@
+{
+	"id": "35d1d0f2-91f5-4169-9e76-db2286d0db50",
+	"prevId": "a8647472-64a5-4ffc-b9f2-6a7e97d41b05",
+	"version": "5",
+	"dialect": "pg",
+	"tables": {
+		"rooms": {
+			"name": "rooms",
+			"schema": "",
+			"columns": {
+				"id": {
+					"name": "id",
+					"type": "uuid",
+					"primaryKey": true,
+					"notNull": true
+				},
+				"description": {
+					"name": "description",
+					"type": "varchar(256)",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"metadata": {
+					"name": "metadata",
+					"type": "json",
+					"primaryKey": false,
+					"notNull": false
+				},
+				"name": {
+					"name": "name",
+					"type": "varchar(256)",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"owner_id": {
+					"name": "owner_id",
+					"type": "varchar",
+					"primaryKey": false,
+					"notNull": true
+				},
+				"status": {
+					"name": "status",
+					"type": "status",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "'preparing'"
+				}
+			},
+			"indexes": {
+				"owner_idx": {
+					"name": "owner_idx",
+					"columns": ["owner_id"],
+					"isUnique": false
+				}
+			},
+			"foreignKeys": {},
+			"compositePrimaryKeys": {},
+			"uniqueConstraints": {}
+		}
+	},
+	"enums": {
+		"status": {
+			"name": "status",
+			"values": {
+				"preparing": "preparing",
+				"ready": "ready",
+				"locked": "locked"
+			}
+		}
+	},
+	"schemas": {},
+	"_meta": {
+		"schemas": {},
+		"tables": {},
+		"columns": {}
+	}
+}

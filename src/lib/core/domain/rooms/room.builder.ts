@@ -1,7 +1,8 @@
-import { type IResult, Combine, Fail, ID, type UID } from 'rich-domain';
+import { type IResult, Combine, Fail, ID, type UID, Ok } from 'rich-domain';
 import { Room } from './room.aggregate-root';
 import { RoomName } from './room-name.value-object';
 import { RoomStatus, type RoomStatusProps } from './room-status.value-object';
+import { RoomDescription } from './room-description.value-object';
 
 export interface RoomBuilderProps {
 	ownerId: string;
@@ -9,9 +10,10 @@ export interface RoomBuilderProps {
 
 export class RoomBuilder {
 	protected nameResult: IResult<RoomName>;
+	protected descriptionResult: IResult<RoomName> = RoomDescription.createWithDefaults();
+	protected statusResult: IResult<RoomStatus> = RoomStatus.createWithDefaults();
 	protected id: UID = ID.create();
 	protected ownerId: UID;
-	protected roomStatus: RoomStatus = RoomStatus.createWithDefaults().value();
 
 	constructor(props: RoomBuilderProps) {
 		this.ownerId = ID.create(props.ownerId);
@@ -29,19 +31,27 @@ export class RoomBuilder {
 	}
 
 	withStatus(props: RoomStatusProps): RoomBuilder {
-		this.roomStatus = RoomStatus.create(props).value();
+		this.statusResult = RoomStatus.create(props);
+		return this;
+	}
+
+	withDescription(content: string): RoomBuilder {
+		this.descriptionResult = RoomDescription.create({
+			value: content
+		});
 		return this;
 	}
 
 	public build(): IResult<Room> {
-		const result = Combine([this.nameResult]);
+		const result = Combine([this.nameResult, this.descriptionResult]);
 		if (result.isFail()) return Fail(result.error());
 
 		return Room.create({
 			id: this.id,
 			name: this.nameResult.value(),
-			ownerId: this.ownerId,
-			status: this.roomStatus
+			status: this.statusResult.value(),
+			description: this.descriptionResult.value(),
+			ownerId: this.ownerId
 		});
 	}
 }

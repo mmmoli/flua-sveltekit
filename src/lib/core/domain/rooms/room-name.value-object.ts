@@ -6,9 +6,11 @@ export const RoomNameSchema = z.object({
 	value: z
 		.string()
 		.min(5, {
-			message: 'Too short. Give your room a more descriptive name.'
+			message: 'Too short. Give your Room a more descriptive name.'
 		})
-		.max(30)
+		.max(256, {
+			message: 'Too long. Give your Room a shorter name.'
+		})
 });
 
 const DEFAULT_NAMES = [
