@@ -40,10 +40,11 @@ export class RoomToInfraAdapter implements IAdapter<Room, RoomModel> {
 
 		const model: RoomModel = {
 			id: input.id.value(),
+			description: input.get('description')?.get('value') ?? null,
 			name: input.get('name').get('value'),
 			ownerId: input.get('ownerId').value(),
+			slug: input.slug,
 			status: input.get('status').get('label'),
-			description: input.get('description')?.get('value') ?? null,
 			metadata,
 			createdAt,
 			updatedAt
@@ -67,6 +68,7 @@ export class DbToRoomAdapter implements IAdapter<DbRoom, Room> {
 			.withCreatedAt(input.createdAt)
 			.withId(input.id)
 			.withName(input.name)
+			.withSlug(input.slug)
 			.withStatus(statusProps)
 			.withUpdatedAt(input.updatedAt);
 

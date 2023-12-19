@@ -10,7 +10,7 @@ export interface DrizzleRoomRepoDeps {
 }
 
 export class DrizzleRoomRepo implements RoomRepoTrait {
-	constructor(protected readonly deps: DrizzleRoomRepoDeps) { }
+	constructor(protected readonly deps: DrizzleRoomRepoDeps) {}
 
 	async fetchListForOwnerId(ownerId: string): Promise<IResult<Room[]>> {
 		try {
@@ -44,8 +44,9 @@ export class DrizzleRoomRepo implements RoomRepoTrait {
 						metadata: model.metadata,
 						name: model.name,
 						ownerId: model.ownerId,
+						slug: model.slug,
 						status: model.status,
-						updatedAt: model.updatedAt,
+						updatedAt: model.updatedAt
 					}
 				});
 			return Ok();

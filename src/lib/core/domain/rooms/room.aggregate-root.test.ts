@@ -3,15 +3,18 @@ import { RoomName } from './room-name.value-object';
 import { Room } from './room.aggregate-root';
 import { ID } from 'rich-domain';
 import { RoomStatus } from './room-status.value-object';
+import { RoomSlug } from './room-slug.value-object';
 
 describe('Room', () => {
 	let room: Room;
 
 	beforeEach(() => {
+		const name = RoomName.createWithDefaults().value();
 		room = Room.create({
 			ownerId: ID.create(),
-			name: RoomName.createWithDefaults().value(),
-			status: RoomStatus.createWithDefaults().value()
+			name,
+			status: RoomStatus.createWithDefaults().value(),
+			slug: RoomSlug.createFromName(name).value()
 		}).value();
 	});
 

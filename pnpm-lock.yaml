@@ -32,6 +32,9 @@ dependencies:
   rich-domain:
     specifier: ^1.19.1
     version: 1.19.1
+  slugify:
+    specifier: ^1.6.6
+    version: 1.6.6
   trpc-svelte-query-adapter:
     specifier: ^2.2.1
     version: 2.2.1(@tanstack/svelte-query@5.14.0)(@trpc/client@10.44.1)(@trpc/server@10.44.1)(@types/node@20.10.4)(@typescript-eslint/eslint-plugin@6.0.0)(@typescript-eslint/parser@6.0.0)(eslint@8.28.0)(svelte@4.2.7)(typescript@5.0.2)
@@ -4382,6 +4385,11 @@ packages:
   /slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
+
+  /slugify@1.6.6:
+    resolution: {integrity: sha512-h+z7HKHYXj6wJU+AnS/+IH8Uh9fdcX1Lrhg1/VMdf9PwoBQXFcXiAdsy2tSK0P6gKwJLXp02r90ahUCqHk9rrw==}
+    engines: {node: '>=8.0.0'}
+    dev: false
 
   /snake-case@3.0.4:
     resolution: {integrity: sha512-LAOh4z89bGQvl9pFfNF8V146i7o7/CqFPbqzYgP+yYzDIDeS9HaNFtXABamRW+AQzEVODcvE79ljJ+8a9YSdMg==}

@@ -2,6 +2,7 @@ import { expect, test, describe, beforeEach } from 'vitest';
 import { RoomBuilder } from './room.builder';
 import { RoomName } from './room-name.value-object';
 import { RoomStatus } from './room-status.value-object';
+import { RoomSlug } from './room-slug.value-object';
 
 describe('RoomBuilder', () => {
 	let builder: RoomBuilder;
@@ -51,5 +52,14 @@ describe('RoomBuilder', () => {
 		const updatedAt = new Date();
 		const room = builder.withUpdatedAt(updatedAt).build().value();
 		expect(room.get('updatedAt')).toBe(updatedAt);
+	});
+
+	test('can set a slug', () => {
+		const slugString = 'fake-slug';
+		const slug = RoomSlug.create({
+			value: slugString
+		}).value();
+		const room = builder.withSlug(slugString).build().value();
+		expect(room.get('slug').isEqual(slug)).toBeTruthy();
 	});
 });

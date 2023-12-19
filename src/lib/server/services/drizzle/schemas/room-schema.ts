@@ -15,17 +15,19 @@ export const rooms = pgTable(
 	'rooms',
 	{
 		id: uuid('id').primaryKey(),
+		createdAt: timestamp('created_at').notNull().defaultNow(),
 		description: varchar('description', { length: 256 }),
 		metadata: json('metadata').$type<RoomMetadata>(),
 		name: varchar('name', { length: 256 }).notNull(),
 		ownerId: varchar('owner_id').notNull(),
+		slug: varchar('slug', { length: 128 }).notNull(),
 		status: statusEnum('status').notNull().default('preparing'),
-		createdAt: timestamp('created_at').notNull().defaultNow(),
 		updatedAt: timestamp('updated_at').notNull().defaultNow()
 	},
 	(table) => {
 		return {
-			ownerId: index('owner_idx').on(table.ownerId)
+			ownerId: index('owner_idx').on(table.ownerId),
+			slug: index('slug_idx').on(table.slug)
 		};
 	}
 );

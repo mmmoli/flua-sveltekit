@@ -5,11 +5,13 @@ import { RoomStatus, type RoomReadyStatus } from './room-status.value-object';
 import type { RoomName } from './room-name.value-object';
 import { RoomReadyEvent } from './room-ready.domain-event';
 import type { RoomDescription } from './room-description.value-object';
+import type { RoomSlug } from './room-slug.value-object';
 
 export interface RoomProps {
 	id?: UID;
 	name: RoomName;
 	ownerId: UID;
+	slug: RoomSlug;
 	status: RoomStatus;
 	description?: RoomDescription;
 	createdAt?: Date;
@@ -29,14 +31,18 @@ export class Room extends Aggregate<RoomProps> {
 		const propsWithDefaults: RoomProps = {
 			...props,
 			createdAt: props.createdAt || now,
-			updatedAt: props.updatedAt || now,
-		}
+			updatedAt: props.updatedAt || now
+		};
 		const room = new Room(propsWithDefaults);
 		return Ok(room);
 	}
 
 	public get status(): RoomStatus {
 		return this.props.status;
+	}
+
+	public get slug(): string {
+		return this.props.slug.get('value');
 	}
 
 	public ready(opts: Omit<RoomReadyStatus, 'label'>) {

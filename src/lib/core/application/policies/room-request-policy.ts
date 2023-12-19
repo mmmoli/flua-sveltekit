@@ -8,7 +8,7 @@ export interface RoomRequestPolicyDeps {
 	roomReadyPolicy?: EventHandler<Room, void>;
 }
 export class RoomRequestPolicy implements EventHandler<Room, void> {
-	constructor(protected readonly deps: RoomRequestPolicyDeps) { }
+	constructor(protected readonly deps: RoomRequestPolicyDeps) {}
 
 	async execute(data: HandlerPayload<Room>): Promise<void> {
 		try {
