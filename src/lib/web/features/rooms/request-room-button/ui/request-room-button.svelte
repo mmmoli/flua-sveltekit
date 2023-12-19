@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { Button } from '$lib/web/shared/design-system/ui';
 	import { createMutation } from '../api/mutation';
 	const mutation = createMutation($page);
 
@@ -8,4 +9,6 @@
 	};
 </script>
 
-<button disabled={$mutation.isPending} on:click|preventDefault={handleClick}>Request Room</button>
+<Button variant="secondary" disabled={$mutation.isPending} on:click={handleClick}
+	>Request Room</Button
+>

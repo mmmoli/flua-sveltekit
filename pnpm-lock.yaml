@@ -20,6 +20,9 @@ dependencies:
   '@trpc/server':
     specifier: ^10.44.1
     version: 10.44.1
+  bits-ui:
+    specifier: ^0.11.8
+    version: 0.11.8(svelte@4.2.7)
   clerk-sveltekit:
     specifier: ^0.3.0
     version: 0.3.0(@sveltejs/kit@2.0.0)(react-dom@18.2.0)(react@18.2.0)(svelte@4.2.7)
@@ -1150,6 +1153,12 @@ packages:
   /@humanwhocodes/object-schema@2.0.1:
     resolution: {integrity: sha512-dvuCeX5fC9dXgJn9t+X5atfmgQAzUOWqS1254Gh0m6i8wKd10ebXkfNKiRK+1GWi/yTvvLDHpoxLr0xxxeslWw==}
 
+  /@internationalized/date@3.5.0:
+    resolution: {integrity: sha512-nw0Q+oRkizBWMioseI8+2TeUPEyopJVz5YxoYVzR0W1v+2YytiYah7s/ot35F149q/xAg4F1gT/6eTd+tsUpFQ==}
+    dependencies:
+      '@swc/helpers': 0.5.3
+    dev: false
+
   /@jridgewell/gen-mapping@0.3.3:
     resolution: {integrity: sha512-HLhSWOLRi875zjjMG/r+Nv0oCW8umGb0BgEhyX3dDX3egwZtB8PqLnjz3yedt8R5StBrzcg4aBpnh8UA9D1BoQ==}
     engines: {node: '>=6.0.0'}
@@ -1199,6 +1208,20 @@ packages:
       - encoding
       - supports-color
     dev: true
+
+  /@melt-ui/svelte@0.65.2(svelte@4.2.7):
+    resolution: {integrity: sha512-BpsSl9Bjp1++8U3+LaDOFUoX/PFQ9N7QWFhlFdUEZduhrbVyU70v9A459SKrQ+esFSjvh1AvqJYkMAUJXJlAmQ==}
+    peerDependencies:
+      svelte: '>=3 <5'
+    dependencies:
+      '@floating-ui/core': 1.5.2
+      '@floating-ui/dom': 1.5.3
+      '@internationalized/date': 3.5.0
+      dequal: 2.0.3
+      focus-trap: 7.5.4
+      nanoid: 4.0.2
+      svelte: 4.2.7
+    dev: false
 
   /@neondatabase/serverless@0.6.0:
     resolution: {integrity: sha512-qXxBRYN0m2v8kVQBfMxbzNGn2xFAhTXFibzQlE++NfJ56Shz3m7+MyBBtXDlEH+3Wfa6lToDXf1MElocY4sJ3w==}
@@ -1518,6 +1541,12 @@ packages:
       vitefu: 0.2.5(vite@5.0.3)
     transitivePeerDependencies:
       - supports-color
+
+  /@swc/helpers@0.5.3:
+    resolution: {integrity: sha512-FaruWX6KdudYloq1AHD/4nU+UsMTdNE8CKyrseXWEcgjDAbvkwJg2QGPAnfIJLIWsjZOSPLOAykK6fuYp4vp4A==}
+    dependencies:
+      tslib: 2.6.2
+    dev: false
 
   /@tanstack/query-core@5.14.0:
     resolution: {integrity: sha512-OEri9fVDYT8XEqgh/dc6fFp1niyqu+MDY+Vp/LwU+scdk9xQLZ7KdUMEUh/sqTEjRM5BlFzAhAv+EIYcvSxt0Q==}
@@ -2002,6 +2031,17 @@ packages:
     dependencies:
       file-uri-to-path: 1.0.0
     dev: true
+
+  /bits-ui@0.11.8(svelte@4.2.7):
+    resolution: {integrity: sha512-T3YaT88OJguBoUU/MSncf41fiIc+5/ka8Au2LUDo0nSECex+LFY40+hKWLJc5tRT56avkyHsI7x9daA2r9eS/g==}
+    peerDependencies:
+      svelte: ^4.0.0
+    dependencies:
+      '@internationalized/date': 3.5.0
+      '@melt-ui/svelte': 0.65.2(svelte@4.2.7)
+      nanoid: 5.0.4
+      svelte: 4.2.7
+    dev: false
 
   /blake3-wasm@2.1.5:
     resolution: {integrity: sha512-F1+K8EbfOZE49dtoPtmxUQrpXaBIl3ICvasLh+nJta0xkz+9kF/7uet9fLnwKqhDrmj6g+6K3Tw9yQPUg2ka5g==}
@@ -2960,6 +3000,12 @@ packages:
   /flatted@3.2.9:
     resolution: {integrity: sha512-36yxDn5H7OFZQla0/jFJmbIKTdZAQHngCedGxiMmpNfEZM0sdEeT+WczLQrjK6D7o2aiyLYDnkw0R3JK0Qv1RQ==}
 
+  /focus-trap@7.5.4:
+    resolution: {integrity: sha512-N7kHdlgsO/v+iD/dMoJKtsSqs5Dz/dXZVebRgJw23LDk+jMi/974zyiOYDziY2JPp8xivq9BmUGwIJMiuSBi7w==}
+    dependencies:
+      tabbable: 6.2.0
+    dev: false
+
   /fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: true
@@ -3608,6 +3654,18 @@ packages:
     resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
+
+  /nanoid@4.0.2:
+    resolution: {integrity: sha512-7ZtY5KTCNheRGfEFxnedV5zFiORN1+Y1N6zvPTnHQd8ENUvfaDBeuJDZb2bN/oXwXxu3qkTXDzy57W5vAmDTBw==}
+    engines: {node: ^14 || ^16 || >=18}
+    hasBin: true
+    dev: false
+
+  /nanoid@5.0.4:
+    resolution: {integrity: sha512-vAjmBf13gsmhXSgBrtIclinISzFFy22WwCYoyilZlsrRXNIHSwgFQ1bEdjRwMT3aoadeIF6HMuDRlOxzfXV8ig==}
+    engines: {node: ^18 || >=20}
+    hasBin: true
+    dev: false
 
   /natural-compare-lite@1.4.0:
     resolution: {integrity: sha512-Tj+HTDSJJKaZnfiuw+iaF9skdPpTo2GtEly5JHnWV/hfv2Qj/9RKsGISQtLh2ox3l5EAGw487hnBee0sIJ6v2g==}
