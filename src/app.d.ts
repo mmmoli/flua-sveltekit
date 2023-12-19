@@ -5,11 +5,11 @@ declare global {
 		// interface Error {}
 		interface Locals {
 			session:
-			| {
-				userId: string
-				claims: unknown
-			}
-			| undefined
+				| {
+						userId: string;
+						claims: unknown;
+				  }
+				| undefined;
 		}
 		// interface PageData {}
 		// interface PageState {}
@@ -17,4 +17,4 @@ declare global {
 	}
 }
 
-export { };
+export {};

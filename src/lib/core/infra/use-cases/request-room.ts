@@ -4,16 +4,15 @@ import { RequestRoomUseCase } from '$lib/core/application/use-cases';
 import { roomRepo } from '../db';
 import { roomService } from '../services';
 
-const roomReadyPolicy = new RoomReadyPolicy()
+const roomReadyPolicy = new RoomReadyPolicy();
 
 const roomRequestPolicy = new RoomRequestPolicy({
-    roomService,
-    roomRepo,
-    roomReadyPolicy
+	roomService,
+	roomRepo,
+	roomReadyPolicy
 });
 
 export const requestRoomUseCase = new RequestRoomUseCase({
-    roomRepo,
-    roomRequestPolicy,
+	roomRepo,
+	roomRequestPolicy
 });
-

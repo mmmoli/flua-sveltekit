@@ -4,11 +4,10 @@ import { roomRepo } from '../db';
 import { roomService } from '../services';
 
 const roomLockedPolicy = new RoomLockedPolicy({
-    roomService
+	roomService
 });
 
 export const lockRoomUseCase = new LockRoomUseCase({
-    roomRepo,
-    roomLockedPolicy
+	roomRepo,
+	roomLockedPolicy
 });
-

@@ -1,34 +1,62 @@
 {
-  "version": "5",
-  "dialect": "pg",
-  "entries": [
-    {
-      "idx": 0,
-      "version": "5",
-      "when": 1702756229665,
-      "tag": "0000_omniscient_changeling",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1702762537019,
-      "tag": "0001_lethal_tarantula",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1702769891602,
-      "tag": "0002_square_dexter_bennett",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1702770518125,
-      "tag": "0003_burly_the_captain",
-      "breakpoints": true
-    }
-  ]
+	"version": "5",
+	"dialect": "pg",
+	"entries": [
+		{
+			"idx": 0,
+			"version": "5",
+			"when": 1702756229665,
+			"tag": "0000_omniscient_changeling",
+			"breakpoints": true
+		},
+		{
+			"idx": 1,
+			"version": "5",
+			"when": 1702762537019,
+			"tag": "0001_lethal_tarantula",
+			"breakpoints": true
+		},
+		{
+			"idx": 2,
+			"version": "5",
+			"when": 1702769891602,
+			"tag": "0002_square_dexter_bennett",
+			"breakpoints": true
+		},
+		{
+			"idx": 3,
+			"version": "5",
+			"when": 1702770518125,
+			"tag": "0003_burly_the_captain",
+			"breakpoints": true
+		},
+		{
+			"idx": 4,
+			"version": "5",
+			"when": 1702943307751,
+			"tag": "0004_windy_wrecker",
+			"breakpoints": true
+		},
+		{
+			"idx": 5,
+			"version": "5",
+			"when": 1702943366398,
+			"tag": "0005_common_shadow_king",
+			"breakpoints": true
+		},
+		{
+			"idx": 6,
+			"version": "5",
+			"when": 1702943394732,
+			"tag": "0006_plain_monster_badoon",
+			"breakpoints": true
+		},
+		{
+			"idx": 7,
+			"version": "5",
+			"when": 1702975211106,
+			"tag": "0007_conscious_leo",
+			"breakpoints": true
+		}
+	]
 }

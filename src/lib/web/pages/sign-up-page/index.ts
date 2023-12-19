@@ -1,1 +1,1 @@
-export { default as SignUpPage } from "./ui/sign-up-page.svelte";
+export { default as SignUpPage } from './ui/sign-up-page.svelte';

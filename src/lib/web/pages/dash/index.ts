@@ -1,1 +1,1 @@
-export { default as DashPage } from './ui/dash-page.svelte'
+export { default as DashPage } from './ui/dash-page.svelte';

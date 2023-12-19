@@ -1,4 +1,4 @@
-import { DbToRoomAdapter, RoomToDbAdapter } from "./room-adapters";
+import { DbToRoomAdapter, RoomToDbAdapter } from './room-adapters';
 
-export const dbToRoomAdapter = new DbToRoomAdapter()
-export const roomToDbAdapter = new RoomToDbAdapter()
+export const dbToRoomAdapter = new DbToRoomAdapter();
+export const roomToDbAdapter = new RoomToDbAdapter();

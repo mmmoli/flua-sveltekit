@@ -1,7 +1,7 @@
 <script lang="ts">
-  import ClerkLoading from "clerk-sveltekit/client/ClerkLoading.svelte";
+	import ClerkLoading from 'clerk-sveltekit/client/ClerkLoading.svelte';
 </script>
 
 <ClerkLoading>
-  <span class="inline-block w-[32px] h-[32px]">…</span>
+	<span class="inline-block h-[32px] w-[32px]">…</span>
 </ClerkLoading>

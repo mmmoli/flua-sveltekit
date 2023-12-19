@@ -1,9 +1,9 @@
-import { RoomNameSchema } from '$lib/core/domain/rooms'
-import { z } from 'zod'
+import { RoomNameSchema } from '$lib/core/domain/rooms';
+import { z } from 'zod';
 
 export const RequestRoomUseCaseSchema = z.object({
-    name: RoomNameSchema,
-    ownerId: z.string().min(4)
-})
+	name: RoomNameSchema,
+	ownerId: z.string().min(4)
+});
 
-export type RequestRoomUseCaseDTO = z.infer<typeof RequestRoomUseCaseSchema>
+export type RequestRoomUseCaseDTO = z.infer<typeof RequestRoomUseCaseSchema>;

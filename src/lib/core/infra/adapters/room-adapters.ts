@@ -1,31 +1,62 @@
-import { RoomBuilder, type Room } from "$lib/core/domain/rooms";
-import type { DbRoom } from "$lib/server/services/drizzle/schemas";
-import { Fail, type IAdapter, type IResult, Ok } from "rich-domain";
+import { RoomBuilder, type Room } from '$lib/core/domain/rooms';
+import {
+	isReadyRoomStatus,
+	RoomStatusSchema,
+	type RoomStatusProps
+} from '$lib/core/domain/rooms/room-status.value-object';
+import type { DbRoom, RoomMetadata } from '$lib/server/services/drizzle/schemas';
+import { Fail, type IAdapter, type IResult, Ok } from 'rich-domain';
 
 export class RoomToDbAdapter implements IAdapter<Room, DbRoom> {
+	toInfra: IAdapter<Room, RoomModel> = new RoomToInfraAdapter();
 	build(input: Room): IResult<DbRoom> {
-		const data = input.toObject()
-		return Ok(data);
+		const infraResult = this.toInfra.build(input);
+		if (infraResult.isFail()) return Fail(infraResult.error());
+		const model = infraResult.value();
+		return Ok(model);
 	}
 }
 
-export type RoomModel = Readonly<DbRoom>
+export type RoomModel = Readonly<DbRoom>;
 export class RoomToInfraAdapter implements IAdapter<Room, RoomModel> {
 	build(input: Room): IResult<DbRoom> {
-		const data = input.toObject()
-		return Ok(data);
+		let metadata: RoomMetadata = {};
+		const statusProps = input.status.toObject() as RoomStatusProps;
+		if (isReadyRoomStatus(statusProps)) {
+			metadata = {
+				...metadata,
+				externalData: {
+					externalId: statusProps.externalId,
+					namespace: statusProps.namespace
+				}
+			};
+		}
+
+		const model: RoomModel = {
+			id: input.id.value(),
+			name: input.get('name').get('value'),
+			ownerId: input.get('ownerId').value(),
+			status: input.get('status').get('label'),
+			metadata
+		};
+
+		return Ok(model);
 	}
 }
 
 export class DbToRoomAdapter implements IAdapter<DbRoom, Room> {
 	build(input: DbRoom): IResult<Room> {
-		const builder = new RoomBuilder({ ownerId: input.ownerId })
-		const result = builder
-			.withId(input.id)
-			.withName(input.name)
-			.build();
+		const builder = new RoomBuilder({ ownerId: input.ownerId });
+		const parseStatus = RoomStatusSchema.safeParse({
+			label: input.status,
+			namespace: input.metadata?.externalData?.namespace,
+			externalId: input.metadata?.externalData?.externalId
+		});
+		if (parseStatus.success === false) return Fail('Validation failed');
+		const statusProps = parseStatus.data;
+		const result = builder.withId(input.id).withName(input.name).withStatus(statusProps).build();
 		if (result.isFail()) return Fail(result.error());
-		const room = result.value()
+		const room = result.value();
 		return Ok(room);
 	}
 }

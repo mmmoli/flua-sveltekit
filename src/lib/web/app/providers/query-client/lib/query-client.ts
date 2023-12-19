@@ -1,10 +1,10 @@
-import { browser } from "$app/environment";
-import { QueryClient } from "@tanstack/svelte-query";
+import { browser } from '$app/environment';
+import { QueryClient } from '@tanstack/svelte-query';
 
 export const queryClient = new QueryClient({
-    defaultOptions: {
-        queries: {
-            enabled: browser,
-        },
-    },
-})
+	defaultOptions: {
+		queries: {
+			enabled: browser
+		}
+	}
+});

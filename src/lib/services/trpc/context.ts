@@ -1,5 +1,5 @@
-import type { RequestEvent } from "@sveltejs/kit";
-import type { inferAsyncReturnType } from "@trpc/server";
+import type { RequestEvent } from '@sveltejs/kit';
+import type { inferAsyncReturnType } from '@trpc/server';
 
 // we're not using the event parameter is this example,
 // hence the eslint-disable rule
@@ -7,8 +7,8 @@ import type { inferAsyncReturnType } from "@trpc/server";
 export async function createContext(event: RequestEvent) {
 	return {
 		auth: {
-			userId: event.locals.session?.userId as string,
-		},
+			userId: event.locals.session?.userId as string
+		}
 	};
 }
 

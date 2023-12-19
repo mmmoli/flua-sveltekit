@@ -1,6 +1,6 @@
 {
-	"id": "b459dd28-7854-458d-8516-38b93e17d9fb",
-	"prevId": "9c972464-19a2-4150-b4d3-74507a468ecb",
+	"id": "1cb07e28-7009-4f2f-8536-783ed9b93832",
+	"prevId": "a55807a3-db93-4888-9191-78426c8f0663",
 	"version": "5",
 	"dialect": "pg",
 	"tables": {
@@ -25,19 +25,43 @@
 					"type": "varchar",
 					"primaryKey": false,
 					"notNull": true
+				},
+				"status": {
+					"name": "status",
+					"type": "status",
+					"primaryKey": false,
+					"notNull": true,
+					"default": "'preparing'"
 				}
 			},
-			"indexes": {},
+			"indexes": {
+				"owner_idx": {
+					"name": "owner_idx",
+					"columns": ["owner_id"],
+					"isUnique": false
+				}
+			},
 			"foreignKeys": {},
 			"compositePrimaryKeys": {},
 			"uniqueConstraints": {}
 		}
 	},
-	"enums": {},
+	"enums": {
+		"status": {
+			"name": "status",
+			"values": {
+				"preparing": "preparing",
+				"ready": "ready",
+				"locked": "locked"
+			}
+		}
+	},
 	"schemas": {},
 	"_meta": {
 		"schemas": {},
 		"tables": {},
-		"columns": {}
+		"columns": {
+			"\"rooms\".\"mood\"": "\"rooms\".\"status\""
+		}
 	}
 }
