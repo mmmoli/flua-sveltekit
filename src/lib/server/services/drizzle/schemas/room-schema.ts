@@ -1,4 +1,4 @@
-import { varchar, uuid, pgTable, index, pgEnum, json, text } from 'drizzle-orm/pg-core';
+import { varchar, uuid, pgTable, index, pgEnum, json, text, timestamp } from 'drizzle-orm/pg-core';
 
 export const statusEnum = pgEnum('status', ['preparing', 'ready', 'locked']);
 
@@ -19,7 +19,9 @@ export const rooms = pgTable(
 		metadata: json('metadata').$type<RoomMetadata>(),
 		name: varchar('name', { length: 256 }).notNull(),
 		ownerId: varchar('owner_id').notNull(),
-		status: statusEnum('status').notNull().default('preparing')
+		status: statusEnum('status').notNull().default('preparing'),
+		createdAt: timestamp('created_at').notNull().defaultNow(),
+		updatedAt: timestamp('updated_at').notNull().defaultNow()
 	},
 	(table) => {
 		return {

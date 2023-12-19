@@ -32,13 +32,21 @@ export class RoomToInfraAdapter implements IAdapter<Room, RoomModel> {
 			};
 		}
 
+		const createdAt = input.get('createdAt');
+		const updatedAt = input.get('updatedAt');
+		if (!createdAt || !updatedAt) {
+			return Fail('Missing createdAt or updatedAt');
+		}
+
 		const model: RoomModel = {
 			id: input.id.value(),
 			name: input.get('name').get('value'),
 			ownerId: input.get('ownerId').value(),
 			status: input.get('status').get('label'),
 			description: input.get('description')?.get('value') ?? null,
-			metadata
+			metadata,
+			createdAt,
+			updatedAt
 		};
 
 		return Ok(model);
@@ -55,7 +63,12 @@ export class DbToRoomAdapter implements IAdapter<DbRoom, Room> {
 		});
 		if (parseStatus.success === false) return Fail('Validation failed');
 		const statusProps = parseStatus.data;
-		builder.withId(input.id).withName(input.name).withStatus(statusProps);
+		builder
+			.withCreatedAt(input.createdAt)
+			.withId(input.id)
+			.withName(input.name)
+			.withStatus(statusProps)
+			.withUpdatedAt(input.updatedAt);
 
 		if (input.description) {
 			builder.withDescription(input.description);

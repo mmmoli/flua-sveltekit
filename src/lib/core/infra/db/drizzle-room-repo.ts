@@ -10,11 +10,12 @@ export interface DrizzleRoomRepoDeps {
 }
 
 export class DrizzleRoomRepo implements RoomRepoTrait {
-	constructor(protected readonly deps: DrizzleRoomRepoDeps) {}
+	constructor(protected readonly deps: DrizzleRoomRepoDeps) { }
 
 	async fetchListForOwnerId(ownerId: string): Promise<IResult<Room[]>> {
 		try {
 			const queryResult = await this.deps.db.query.rooms.findMany({
+				orderBy: (room, { desc }) => [desc(room.updatedAt)],
 				where: (room, { eq }) => eq(room.ownerId, ownerId)
 			});
 			if (queryResult.length === 0) return Ok([]);
@@ -39,10 +40,12 @@ export class DrizzleRoomRepo implements RoomRepoTrait {
 				.onConflictDoUpdate({
 					target: rooms.id,
 					set: {
+						createdAt: model.createdAt,
+						metadata: model.metadata,
 						name: model.name,
 						ownerId: model.ownerId,
 						status: model.status,
-						metadata: model.metadata
+						updatedAt: model.updatedAt,
 					}
 				});
 			return Ok();

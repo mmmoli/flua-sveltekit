@@ -14,6 +14,8 @@ export class RoomBuilder {
 	protected statusResult: IResult<RoomStatus> = RoomStatus.createWithDefaults();
 	protected id: UID = ID.create();
 	protected ownerId: UID;
+	protected createdAt: Date | undefined;
+	protected updatedAt: Date | undefined;
 
 	constructor(props: RoomBuilderProps) {
 		this.ownerId = ID.create(props.ownerId);
@@ -42,6 +44,16 @@ export class RoomBuilder {
 		return this;
 	}
 
+	withCreatedAt(date: Date): RoomBuilder {
+		this.createdAt = date;
+		return this;
+	}
+
+	withUpdatedAt(date: Date) {
+		this.updatedAt = date;
+		return this;
+	}
+
 	public build(): IResult<Room> {
 		const result = Combine([this.nameResult, this.descriptionResult]);
 		if (result.isFail()) return Fail(result.error());
@@ -51,7 +63,9 @@ export class RoomBuilder {
 			name: this.nameResult.value(),
 			status: this.statusResult.value(),
 			description: this.descriptionResult.value(),
-			ownerId: this.ownerId
+			ownerId: this.ownerId,
+			createdAt: this.createdAt,
+			updatedAt: this.updatedAt
 		});
 	}
 }

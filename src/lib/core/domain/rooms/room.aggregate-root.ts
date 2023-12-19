@@ -12,6 +12,8 @@ export interface RoomProps {
 	ownerId: UID;
 	status: RoomStatus;
 	description?: RoomDescription;
+	createdAt?: Date;
+	updatedAt?: Date;
 }
 
 export class Room extends Aggregate<RoomProps> {
@@ -23,7 +25,13 @@ export class Room extends Aggregate<RoomProps> {
 	}
 
 	public static create(props: RoomProps): IResult<Room> {
-		const room = new Room(props);
+		const now = new Date();
+		const propsWithDefaults: RoomProps = {
+			...props,
+			createdAt: props.createdAt || now,
+			updatedAt: props.updatedAt || now,
+		}
+		const room = new Room(propsWithDefaults);
 		return Ok(room);
 	}
 

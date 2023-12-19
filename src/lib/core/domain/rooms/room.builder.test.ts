@@ -40,4 +40,16 @@ describe('RoomBuilder', () => {
 		const room = builder.withStatus({ label: 'locked' }).build().value();
 		expect(room.status.isEqual(status)).toBeTruthy();
 	});
+
+	test('can set createdAt', () => {
+		const createdAt = new Date();
+		const room = builder.withCreatedAt(createdAt).build().value();
+		expect(room.get('createdAt')).toBe(createdAt);
+	});
+
+	test('can set updatedAt', () => {
+		const updatedAt = new Date();
+		const room = builder.withUpdatedAt(updatedAt).build().value();
+		expect(room.get('updatedAt')).toBe(updatedAt);
+	});
 });
