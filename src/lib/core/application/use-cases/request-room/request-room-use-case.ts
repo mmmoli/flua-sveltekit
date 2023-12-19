@@ -15,11 +15,13 @@ export class RequestRoomUseCase implements IUseCase<RequestRoomUseCaseDTO, IResu
 	constructor(protected readonly deps: RequestRoomUseCaseDeps) {}
 	async execute(dto: RequestRoomUseCaseDTO): Promise<IResult<void>> {
 		try {
-			const roomResult = new RoomBuilder({
+			const builder = new RoomBuilder({
 				ownerId: dto.ownerId
-			})
-				.withName(dto.name.value)
-				.build();
+			});
+			if (dto.name) {
+				builder.withName(dto.name.value);
+			}
+			const roomResult = builder.build();
 			if (roomResult.isFail()) return Fail(roomResult.error());
 			const room = roomResult.value();
 

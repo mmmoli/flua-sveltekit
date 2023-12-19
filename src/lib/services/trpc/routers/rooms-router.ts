@@ -26,7 +26,7 @@ export const rooms = t.router({
 		.input(
 			RequestRoomUseCaseSchema.omit({
 				ownerId: true
-			})
+			}).optional()
 		)
 		.mutation(
 			async ({

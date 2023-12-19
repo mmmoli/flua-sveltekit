@@ -4,12 +4,8 @@
 	const mutation = createMutation($page);
 
 	const handleClick = () => {
-		$mutation.mutate({
-			name: {
-				value: 'My Awesome Room'
-			}
-		});
+		$mutation.mutate();
 	};
 </script>
 
-<button on:click|preventDefault={handleClick}>Request Room</button>
+<button disabled={$mutation.isPending} on:click|preventDefault={handleClick}>Request Room</button>
