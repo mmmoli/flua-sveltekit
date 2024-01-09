@@ -20,6 +20,9 @@ dependencies:
   '@trpc/server':
     specifier: ^10.44.1
     version: 10.44.1
+  '@xstate/svelte':
+    specifier: ^3.0.1
+    version: 3.0.1(svelte@4.2.7)(xstate@5.3.1)
   bits-ui:
     specifier: ^0.11.8
     version: 0.11.8(svelte@4.2.7)
@@ -56,6 +59,9 @@ dependencies:
   trpc-sveltekit:
     specifier: ^3.5.22
     version: 3.5.22(@sveltejs/adapter-node@2.0.0)(@trpc/client@10.44.1)(@trpc/server@10.44.1)(ws@8.15.1)
+  xstate:
+    specifier: ^5.3.1
+    version: 5.3.1
   zod:
     specifier: ^3.22.4
     version: 3.22.4
@@ -1850,6 +1856,19 @@ packages:
       loupe: 2.3.7
       pretty-format: 27.5.1
     dev: true
+
+  /@xstate/svelte@3.0.1(svelte@4.2.7)(xstate@5.3.1):
+    resolution: {integrity: sha512-GsEyoTlcYkWCAqtLlY4p8PHLdyu5nSLbcLRPn0TOiH+uhKWwiath4vjvhB6fBotvQ+IY+pIN3+o3B2Z9DMqOfA==}
+    peerDependencies:
+      svelte: ^3.24.1 || ^4
+      xstate: ^5.3.0
+    peerDependenciesMeta:
+      xstate:
+        optional: true
+    dependencies:
+      svelte: 4.2.7
+      xstate: 5.3.1
+    dev: false
 
   /@zxcvbn-ts/core@3.0.4:
     resolution: {integrity: sha512-aQeiT0F09FuJaAqNrxynlAwZ2mW/1MdXakKWNmGM1Qp/VaY6CnB/GfnMS2T8gB2231Esp1/maCWd8vTG4OuShw==}
@@ -5272,6 +5291,10 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
+
+  /xstate@5.3.1:
+    resolution: {integrity: sha512-j4lYbMKqTQ1gxS0NAhjX0JkFJ44OLqYgXV7kVSc0YpnENhPNigvrFMqpBFtfho39pgzdcmpmnmUyEUVWwYMOdA==}
+    dev: false
 
   /xtend@4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}

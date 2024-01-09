@@ -10,7 +10,22 @@ export interface DrizzleRoomRepoDeps {
 }
 
 export class DrizzleRoomRepo implements RoomRepoTrait {
-	constructor(protected readonly deps: DrizzleRoomRepoDeps) {}
+	constructor(protected readonly deps: DrizzleRoomRepoDeps) { }
+	async fetchBySlug(slug: string): Promise<IResult<Room>> {
+		try {
+			const queryResult = await this.deps.db.query.rooms.findFirst({
+				where: (room, { eq }) => eq(room.slug, slug)
+			});
+			if (!queryResult) return Fail('Room not found');
+			const roomResult = this.deps.toDomain.build(queryResult);
+			if (roomResult.isFail()) return Fail(roomResult.error());
+			const room = roomResult.value();
+			return Ok(room);
+		} catch (error) {
+			console.error(JSON.stringify(error, null, 2));
+			return Fail('Failed to fetch room');
+		}
+	}
 
 	async fetchListForOwnerId(ownerId: string): Promise<IResult<Room[]>> {
 		try {

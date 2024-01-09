@@ -1,3 +1,11 @@
+<script context="module">
+	export async function load() {
+		console.log('room-list-for-user: load module func');
+		const name = 'room-list-for-user';
+		return { props: { name } };
+	}
+</script>
+
 <script lang="ts">
 	import { createQuery } from '../api/query';
 	import { page } from '$app/stores';

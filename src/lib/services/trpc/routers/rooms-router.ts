@@ -44,5 +44,29 @@ export const rooms = t.router({
 
 				return result.value();
 			}
+		),
+	fetchBySlug: t.procedure
+		.use(auth)
+		.input(
+			RequestRoomUseCaseSchema.omit({
+				ownerId: true
+			}).optional()
+		)
+		.query(
+			async ({
+				ctx: {
+					auth: { userId }
+				},
+				input
+			}) => {
+				const result = await requestRoomUseCase.execute({
+					...input,
+					ownerId: userId
+				});
+
+				result.execute(throwTRPCError).withData({ message: result.error() }).on('fail');
+
+				return result.value();
+			}
 		)
 });

@@ -5,6 +5,6 @@
 	};
 </script>
 
-<a href={`/${room.slug}/manage`}>
+<a href={`/rooms/${room.slug}/manage`}>
 	<p>{room.name}</p>
 </a>
