@@ -1,14 +1,5 @@
-<script lang="ts">
-	import { page } from '$app/stores';
+<script>
 	import { Button } from '$lib/web/shared/design-system/ui';
-	import { createMutation } from '../api/mutation';
-	const mutation = createMutation($page);
-
-	const handleClick = () => {
-		$mutation.mutate();
-	};
 </script>
 
-<Button variant="secondary" disabled={$mutation.isPending} on:click={handleClick}
-	>Request Room</Button
->
+<Button variant="secondary">Request Room</Button>

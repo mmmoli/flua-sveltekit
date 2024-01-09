@@ -1,1 +1,2 @@
-export * from './room-schema';
+export * from './auth';
+export * from './rooms';
