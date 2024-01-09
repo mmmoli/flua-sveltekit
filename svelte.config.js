@@ -8,7 +8,12 @@ const config = {
 	preprocess: [vitePreprocess({})],
 
 	kit: {
-		adapter: adapter({})
+		adapter: adapter({}),
+		alias: {
+			'~ui/*': 'src/lib/web/shared/design-system/ui/*',
+			'~features/*': 'src/lib/web/features/*',
+			'~widgets/*': 'src/lib/web/widget/*',
+		}
 	}
 };
 

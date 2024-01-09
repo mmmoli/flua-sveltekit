@@ -1,5 +1,5 @@
 <script>
-	import { Button } from '$lib/web/shared/design-system/ui';
+	import { Button } from '~ui/button';
 </script>
 
 <Button variant="secondary">Request Room</Button>
