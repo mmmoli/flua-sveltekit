@@ -7,20 +7,20 @@ export interface FetchRoomForSlugUseCaseDeps<T> {
 	presenter: IAdapter<Room, T>;
 }
 
-export class FetchRoomForSlugUseCase<T extends Record<string, unknown>>
-	implements IUseCase<FetchRoomForSlugUseCaseDTO, IResult<Room | T>>
+export class FetchRoomForSlugUseCase<T>
+	implements IUseCase<FetchRoomForSlugUseCaseDTO, IResult<T>>
 {
-	constructor(protected readonly deps: FetchRoomForSlugUseCaseDeps<Room | T>) {}
+	constructor(protected readonly deps: FetchRoomForSlugUseCaseDeps<T>) {}
 
-	async execute(dto: FetchRoomForSlugUseCaseDTO): Promise<IResult<Room | T>> {
+	async execute(dto: FetchRoomForSlugUseCaseDTO): Promise<IResult<T>> {
 		try {
 			const roomResult = await this.deps.roomRepo.fetchBySlug(dto.slug.value);
 			if (roomResult.isFail()) return Fail(roomResult.error());
 			const room = roomResult.value();
-			if (!this.deps.presenter) return Ok(room);
+
 			const presentResult: IResult<T, string> = this.deps.presenter.build(room);
 			if (presentResult.isFail()) return Fail(presentResult.error());
-			const presenter = presentResult.value();
+			const presenter = presentResult.value() as T extends void ? null : T;
 			return Ok(presenter);
 		} catch (error) {
 			console.log(JSON.stringify(error, null, 2));

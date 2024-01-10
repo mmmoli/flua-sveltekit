@@ -2,4 +2,8 @@
 	import { DashPage } from '$lib/web/pages/dash';
 </script>
 
-<DashPage />
+<DashPage
+	actions={{
+		requestRoom: '?/requestRoom'
+	}}
+/>

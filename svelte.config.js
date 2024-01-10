@@ -13,7 +13,9 @@ const config = {
 			'~ui/*': 'src/lib/web/shared/design-system/ui/*',
 			'~features/*': 'src/lib/web/features/*',
 			'~widgets/*': 'src/lib/web/widget/*',
-		}
+			'~commands/*': 'src/lib/server/commands/*',
+			'~queries/*': 'src/lib/server/queries/*',
+		},		
 	}
 };
 

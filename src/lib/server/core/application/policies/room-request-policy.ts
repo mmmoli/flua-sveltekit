@@ -1,6 +1,6 @@
 import type { Room, RoomRepoTrait, RoomServiceTrait } from '$lib/server/core/domain/rooms';
 import { RoomReadyEvent } from '$lib/server/core/domain/rooms/room-ready.domain-event';
-import { Ok, type EventHandler, type HandlerPayload, type IResult, Fail } from 'rich-domain';
+import { type EventHandler, type HandlerPayload } from 'rich-domain';
 
 export interface RoomRequestPolicyDeps {
 	roomService: RoomServiceTrait;

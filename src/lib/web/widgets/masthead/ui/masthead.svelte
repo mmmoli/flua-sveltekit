@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { UserButton } from '$lib/web/features/auth/user-button';
+	import { UserButton } from '~features/auth/user-button';
 	import { ModeToggleButton } from '~features/mode-toggle-button';
 </script>
 

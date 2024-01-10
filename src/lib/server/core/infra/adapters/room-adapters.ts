@@ -50,7 +50,7 @@ export class RoomToInfraAdapter implements IAdapter<Room, RoomModel> {
 			updatedAt
 		};
 
-		return Ok(model);
+		return Ok(Object.freeze(model));
 	}
 }
 
