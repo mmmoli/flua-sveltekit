@@ -7,7 +7,7 @@ export interface LoadManagePage {
 }
 
 export const loadManagePage = ({ roomSlug, userId }: LoadManagePage) => {
-	const query = fetchRoomForSlugQuery({
+	const roomPromise = fetchRoomForSlugQuery({
 		slug: {
 			value: roomSlug
 		},
@@ -18,6 +18,6 @@ export const loadManagePage = ({ roomSlug, userId }: LoadManagePage) => {
 	});
 
 	return {
-		query
+		roomPromise
 	};
 };

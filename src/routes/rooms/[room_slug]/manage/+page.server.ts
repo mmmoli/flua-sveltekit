@@ -12,9 +12,9 @@ export const load: PageServerLoad = async (event) => {
 			message: 'Unauthorized'
 		});
 
-	const { query } = loadManagePage({ roomSlug: event.params.room_slug, userId });
+	const { roomPromise } = loadManagePage({ roomSlug: event.params.room_slug, userId });
 
 	return {
-		query: await query
+		room: await roomPromise
 	};
 };
