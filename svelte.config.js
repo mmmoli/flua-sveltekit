@@ -11,6 +11,8 @@ const config = {
 		adapter: adapter({}),
 		alias: {
 			'~ui/*': 'src/lib/web/shared/design-system/ui/*',
+			'~shared/*': 'src/lib/web/shared/*',
+			'~entities/*': 'src/lib/web/entities/*',
 			'~features/*': 'src/lib/web/features/*',
 			'~widgets/*': 'src/lib/web/widget/*',
 			'~commands/*': 'src/lib/server/commands/*',

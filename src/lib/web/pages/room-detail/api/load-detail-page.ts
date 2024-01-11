@@ -6,7 +6,7 @@ export interface LoadManagePage {
 	userId: string;
 }
 
-export const loadManagePage = ({ roomSlug, userId }: LoadManagePage) => {
+export const loadDetailPage = ({ roomSlug, userId }: LoadManagePage) => {
 	const roomPromise = loadRoom({
 		roomSlug,
 		userId

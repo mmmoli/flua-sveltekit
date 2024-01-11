@@ -1,15 +1,13 @@
 <script lang="ts">
 	import type { RoomModel } from '$lib/server/core/infra/adapters/room-adapters';
-	import { RoomManagePage } from '$lib/web/pages/room-manage';
+	import { RoomListPage } from '$lib/web/pages/room-list';
 	import type { PageData } from './$types';
 	export let data: PageData;
-	const room: RoomModel = data?.room;
+	const rooms: RoomModel[] = data?.rooms ?? [];
 </script>
 
 <svelte:head>
-	<title>{room?.name}</title>
+	<title>Room List</title>
 </svelte:head>
 
-{#if room}
-	<RoomManagePage {room} />
-{/if}
+<RoomListPage {rooms} />
