@@ -1,26 +1,24 @@
 <script lang="ts">
-	import { RequestRoomButton } from '$lib/web/features/rooms/request-room-button';
-	import { RoomListForUser } from '$lib/web/widgets/room-list-for-user';
-	import { RoomCount } from '$lib/web/features/rooms/room-count';
+	import { RequestRoomButton } from '~features/rooms/request-room-button';
+	import { RoomListForUser } from '~features/rooms/room-list-for-user';
+	import { RoomCount } from '~features/rooms/room-count';
 	import { T } from '~ui/typography';
+	import type { RoomModel } from '$lib/server/core/infra/adapters/room-adapters';
 
 	interface ServerActions {
 		requestRoom: string;
 	}
 
+	export let rooms: RoomModel[];
+
 	export let actions: ServerActions;
 </script>
 
-<T.H1>Dash</T.H1>
-<T.H2>Something else</T.H2>
-<T.Lead>Something else</T.Lead>
-<T.P>
-	Lorem ipsum dolor sit amet consectetur adipisicing elit. Id ab reprehenderit culpa necessitatibus
-	quas, molestiae perferendis fugit labore molestias voluptas enim ipsum. Natus, laborum! Veniam
-	labore repellat impedit voluptatum exercitationem.
-</T.P>
-<T.Small>Something else</T.Small>
-
-<RoomCount />
-<RequestRoomButton action={actions.requestRoom} />
-<RoomListForUser />
+<div class="flex flex-col space-y-8">
+	<div>
+		<T.H1>Dash</T.H1>
+	</div>
+	<RoomCount />
+	<RequestRoomButton action={actions.requestRoom} />
+	<RoomListForUser {rooms} />
+</div>
