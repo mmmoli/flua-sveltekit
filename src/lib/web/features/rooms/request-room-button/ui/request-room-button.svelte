@@ -1,9 +1,27 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { Loader2 } from 'lucide-svelte';
 	import { Button } from '~ui/button';
 	export let action: string;
+	let sending = false;
 </script>
 
-<form method="POST" {action} use:enhance>
-	<Button variant="default" type="submit">Request Room</Button>
+<form
+	method="POST"
+	{action}
+	use:enhance={() => {
+		sending = true;
+		// return ({ update }) => {
+		// 	update().finally(async () => {
+		// 		sending = false;
+		// 	});
+		// };
+	}}
+>
+	<Button variant="default" type="submit" disabled={sending}>
+		{#if sending}
+			<Loader2 class="mr-2 h-4 w-4 animate-spin" />
+		{/if}
+		Request Room
+	</Button>
 </form>

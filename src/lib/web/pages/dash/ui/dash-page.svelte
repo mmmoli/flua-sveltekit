@@ -15,9 +15,7 @@
 </script>
 
 <div class="flex flex-col space-y-8">
-	<div>
-		<T.H1>Dash</T.H1>
-	</div>
+	<T.H1>Dash</T.H1>
 	<RoomCount />
 	<RequestRoomButton action={actions.requestRoom} />
 	<RoomListForUser {rooms} />
