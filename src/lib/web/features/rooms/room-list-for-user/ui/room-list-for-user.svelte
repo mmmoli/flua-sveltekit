@@ -25,7 +25,7 @@
 							href={routes.roomDetailPage({
 								roomSlug: room.slug
 							})}
-							class={buttonVariants({ variant: 'link' })}>View</a
+							class={buttonVariants({ variant: 'link' })}>Launch</a
 						>
 					</Table.Cell>
 				</Table.Row>
