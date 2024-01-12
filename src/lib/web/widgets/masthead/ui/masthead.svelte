@@ -1,13 +1,17 @@
 <script lang="ts">
 	import { UserButton } from '~features/auth/user-button';
 	import { ModeToggleButton } from '~features/mode-toggle-button';
+	import { Logomark } from '~ui/logomark';
 </script>
 
 <div class="m-4 flex justify-between">
-	<div class="flex items-center space-x-2">
-		<a href="/" class="text-sm" data-testid="masthead-brand">Flua</a>
+	<div class="flex flex-grow items-center justify-start space-x-2">Something</div>
+	<div class="flex flex-grow items-center justify-center space-x-2">
+		<a href="/" data-testid="masthead-brand">
+			<Logomark size="md" />
+		</a>
 	</div>
-	<div class="flex items-center space-x-2">
+	<div class="flex flex-grow items-center justify-end space-x-2">
 		<UserButton />
 		<ModeToggleButton />
 	</div>

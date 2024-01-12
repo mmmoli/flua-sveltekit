@@ -14,6 +14,7 @@
 				<Table.Head class="w-40">Room</Table.Head>
 				<Table.Head>Description</Table.Head>
 				<Table.Head>Status</Table.Head>
+				<Table.Head class="text-right">Change link</Table.Head>
 			</Table.Row>
 		</Table.Header>
 		<Table.Body>
@@ -29,7 +30,14 @@
 					</Table.Cell>
 					<Table.Cell>{room.description}</Table.Cell>
 					<Table.Cell>{room.status}</Table.Cell>
-					<Table.Cell class="text-right">Change</Table.Cell>
+					<Table.Cell class="text-right">
+						<a
+							href={routes.roomManagePage({
+								roomSlug: room.slug
+							})}
+							class={buttonVariants({ variant: 'link' })}>Change</a
+						>
+					</Table.Cell>
 				</Table.Row>
 			{/each}
 		</Table.Body>
