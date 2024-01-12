@@ -9,7 +9,7 @@
 		requestRoom: string;
 	}
 
-	export let rooms: RoomModel[];
+	export let roomListPromise: Promise<RoomModel[]>;
 
 	export let actions: ServerActions;
 </script>
@@ -18,5 +18,12 @@
 	<T.H1>Dash</T.H1>
 	<RoomCount />
 	<RequestRoomButton action={actions.requestRoom} />
-	<RoomListForUser {rooms} />
+
+	{#await roomListPromise}
+		Loading comments...
+	{:then rooms}
+		<RoomListForUser {rooms} />
+	{:catch error}
+		<p>error loading rooms</p>
+	{/await}
 </div>

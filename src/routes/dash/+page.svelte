@@ -3,7 +3,7 @@
 	import { DashPage } from '$lib/web/pages/dash';
 	import type { PageData } from './$types';
 	export let data: PageData;
-	const rooms: RoomModel[] = data?.rooms;
+	const roomListPromise: Promise<RoomModel[]> = data?.roomsListPromise;
 </script>
 
 <svelte:head>
@@ -11,7 +11,7 @@
 </svelte:head>
 
 <DashPage
-	{rooms}
+	{roomListPromise}
 	actions={{
 		requestRoom: '?/requestRoom'
 	}}

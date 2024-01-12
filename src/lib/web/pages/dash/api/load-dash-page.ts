@@ -5,10 +5,14 @@ export interface LoadDashPageProps {
 }
 
 export const loadDashPage = ({ userId }: LoadDashPageProps) => {
-	return fetchRoomListForOwnerQuery({
+	const roomList = fetchRoomListForOwnerQuery({
 		ownerId: userId
 	}).then((result) => {
 		if (result.isFail()) return [];
 		return result.value();
 	});
+
+	return {
+		roomList
+	};
 };

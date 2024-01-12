@@ -13,21 +13,23 @@
 			<Table.Row>
 				<Table.Head class="w-40">Room</Table.Head>
 				<Table.Head>Description</Table.Head>
+				<Table.Head>Status</Table.Head>
 			</Table.Row>
 		</Table.Header>
 		<Table.Body>
 			{#each rooms as room}
 				<Table.Row>
-					<Table.Cell class="font-medium">{room.name}</Table.Cell>
-					<Table.Cell>{room.description}</Table.Cell>
-					<Table.Cell class="text-right">
+					<Table.Cell class="font-medium">
 						<a
 							href={routes.roomDetailPage({
 								roomSlug: room.slug
 							})}
-							class={buttonVariants({ variant: 'link' })}>Launch</a
+							class={buttonVariants({ variant: 'link' })}>{room.name}</a
 						>
 					</Table.Cell>
+					<Table.Cell>{room.description}</Table.Cell>
+					<Table.Cell>{room.status}</Table.Cell>
+					<Table.Cell class="text-right">Change</Table.Cell>
 				</Table.Row>
 			{/each}
 		</Table.Body>

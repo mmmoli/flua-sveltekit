@@ -1,6 +1,6 @@
 import { redirect, type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { requestRoomAction as requestRoom } from '~features/rooms/request-room-button/api/action';
+import { requestRoomAction as requestRoom } from '~features/rooms/request-room-button/api/request-room-action';
 import { loadDashPage } from '~pages/dash/api/load-dash-page';
 
 export const load: PageServerLoad = async (event) => {
@@ -8,12 +8,12 @@ export const load: PageServerLoad = async (event) => {
 	const userId = session?.user?.id;
 	if (!userId) throw redirect(303, '/');
 
-	const roomListPromise = loadDashPage({
+	const { roomList } = loadDashPage({
 		userId
 	});
 
 	return {
-		rooms: await roomListPromise
+		roomsListPromise: roomList
 	};
 };
 
