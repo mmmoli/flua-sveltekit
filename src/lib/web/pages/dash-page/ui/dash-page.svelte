@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { RequestRoomButton } from '~features/rooms/request-room-button';
+	import { RequestRoomButton } from '~features/rooms/request-room';
 	import { RoomListForUser } from '~features/rooms/room-list-for-user';
 	import { RoomCount } from '~features/rooms/room-count';
 	import { T } from '~ui/typography';
