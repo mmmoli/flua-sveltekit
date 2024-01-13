@@ -5,8 +5,7 @@
 </script>
 
 <div class="m-4 flex justify-between">
-	<div class="flex flex-grow items-center justify-start space-x-2">Something</div>
-	<div class="flex flex-grow items-center justify-center space-x-2">
+	<div class="flex flex-grow items-center justify-start space-x-2">
 		<a href="/" data-testid="masthead-brand">
 			<Logomark size="md" />
 		</a>

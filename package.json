@@ -53,6 +53,7 @@
 		"@auth/sveltekit": "^0.5.2",
 		"@fontsource-variable/overpass-mono": "^5.0.16",
 		"@neondatabase/serverless": "^0.6.1",
+		"@xstate/svelte": "^3.0.2",
 		"bits-ui": "^0.11.8",
 		"clsx": "^2.1.0",
 		"dotenv": "^16.3.1",
@@ -64,6 +65,7 @@
 		"svelte-sonner": "^0.3.11",
 		"tailwind-merge": "^2.2.0",
 		"tailwind-variants": "^0.1.20",
+		"xstate": "^5.5.1",
 		"zod-validation-error": "^2.1.0"
 	}
 }

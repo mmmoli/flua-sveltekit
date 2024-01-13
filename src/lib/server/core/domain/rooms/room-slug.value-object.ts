@@ -29,7 +29,11 @@ export class RoomSlug extends ValueObject<RoomSlugProps> {
 	public static override create(props: RoomSlugProps): IResult<RoomSlug> {
 		const parseResult = this.validate(props);
 		if (!parseResult.success) return Fail(parseResult.error.issues.pop()?.message as string);
-		return Ok(new RoomSlug(props));
+		return Ok(
+			new RoomSlug({
+				value: parseResult.data.value.toLowerCase()
+			})
+		);
 	}
 
 	public static createFromName(name: RoomName): IResult<RoomSlug> {

@@ -1,5 +1,6 @@
 import { fail, redirect, type RequestEvent } from '@sveltejs/kit';
 import { requestRoomCommand } from '~commands/request-room';
+import { routes } from '~shared/config/routes';
 
 export const requestRoomAction = async (event: RequestEvent) => {
 	const session = await event.locals.getSession();
@@ -15,7 +16,7 @@ export const requestRoomAction = async (event: RequestEvent) => {
 		});
 	const room = result.value();
 
-	redirect(303, `/rooms/${room.slug}/manage`);
+	redirect(303, routes.roomManagePage({ roomSlug: room.slug }));
 
 	return {
 		room

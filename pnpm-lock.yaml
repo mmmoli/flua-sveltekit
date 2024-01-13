@@ -20,6 +20,9 @@ dependencies:
   '@neondatabase/serverless':
     specifier: ^0.6.1
     version: 0.6.1
+  '@xstate/svelte':
+    specifier: ^3.0.2
+    version: 3.0.2(svelte@4.2.8)(xstate@5.5.1)
   bits-ui:
     specifier: ^0.11.8
     version: 0.11.8(svelte@4.2.8)
@@ -53,6 +56,9 @@ dependencies:
   tailwind-variants:
     specifier: ^0.1.20
     version: 0.1.20(tailwindcss@3.4.1)
+  xstate:
+    specifier: ^5.5.1
+    version: 5.5.1
   zod-validation-error:
     specifier: ^2.1.0
     version: 2.1.0(zod@3.22.4)
@@ -1501,6 +1507,19 @@ packages:
       loupe: 2.3.7
       pretty-format: 27.5.1
     dev: true
+
+  /@xstate/svelte@3.0.2(svelte@4.2.8)(xstate@5.5.1):
+    resolution: {integrity: sha512-yBOmyVq/b87OHh2qRY8aMm7lusW+kMWMC9JIZwID9/FyX4kMQYtwkqg3NE7G+L7sbNQ2BTARA0KU4d7sC7BRyw==}
+    peerDependencies:
+      svelte: ^3.24.1 || ^4
+      xstate: ^5.4.1
+    peerDependenciesMeta:
+      xstate:
+        optional: true
+    dependencies:
+      svelte: 4.2.8
+      xstate: 5.5.1
+    dev: false
 
   /abbrev@1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}
@@ -4588,6 +4607,10 @@ packages:
       utf-8-validate:
         optional: true
     dev: true
+
+  /xstate@5.5.1:
+    resolution: {integrity: sha512-12Was43pPJKg3JWoelOREtTNYgFz6tRlNrMaRuqOibEe3pn8/uOWiP8ySMfOynyIjHUxd4BU7wV9O54Ma3FM6g==}
+    dev: false
 
   /xtend@4.0.2:
     resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
