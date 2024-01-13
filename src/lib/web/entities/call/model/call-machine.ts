@@ -25,9 +25,6 @@ export const callMachine = setup({
 		events: ParticipantEvent;
 	},
 	actions: {
-		joinRoom: () => {
-			console.warn('joinRoom not implemented');
-		},
 		unmute: () => {
 			console.warn('unmute not implemented');
 		},

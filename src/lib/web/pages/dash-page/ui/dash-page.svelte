@@ -7,6 +7,7 @@
 	import type { PageData } from '../../../../../routes/dash/$types';
 
 	export let data: PageData;
+	const currentUrl = data?.pathname;
 
 	interface ServerActions {
 		requestRoom: string;
@@ -18,7 +19,7 @@
 	<title>Dashboard</title>
 </svelte:head>
 
-<NavLayout>
+<NavLayout {currentUrl}>
 	<div class="flex flex-col space-y-8">
 		<T.H1>Dash</T.H1>
 		<RoomCount />

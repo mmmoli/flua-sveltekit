@@ -7,11 +7,11 @@
 </script>
 
 <svelte:head>
-	<title>Account</title>
+	<title>Rooms</title>
 </svelte:head>
 
 <NavLayout {currentUrl}>
 	<div class="flex flex-col space-y-8">
-		<T.H1>Account</T.H1>
+		<T.H1>Rooms</T.H1>
 	</div>
 </NavLayout>

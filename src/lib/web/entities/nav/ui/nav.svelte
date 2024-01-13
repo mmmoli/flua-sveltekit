@@ -1,20 +1,16 @@
 <script lang="ts">
-	import { page } from '$app/stores';
 	import NavItem from './nav-item.svelte';
 	import { navItems } from '../model/nav';
-	import { isActive } from '../lib/is-active';
-	export let activeUrl: string = $page.url.pathname;
+	import { navIsActive } from '../lib/nav-is-active';
+	export let activeUrl: string | undefined;
+	const isActive = (navUrl: string) => navIsActive(navUrl, String(activeUrl));
 </script>
 
 <nav>
 	<ol class="flex flex-col space-y-2">
 		{#each navItems as navItem}
 			<li>
-				<NavItem
-					href={navItem.href}
-					label={navItem.label}
-					isActive={isActive(navItem.href, activeUrl)}
-				/>
+				<NavItem href={navItem.href} label={navItem.label} isActive={isActive(navItem.href)} />
 			</li>
 		{/each}
 	</ol>

@@ -3,6 +3,10 @@ import type { PageServerLoad } from './$types';
 import { requestRoomAction as requestRoom } from '~features/rooms/request-room/api/request-room-action';
 import { load as loadDashPage } from '~pages/dash-page/api/load';
 
+export const config = {
+	runtime: 'edge'
+};
+
 export const load: PageServerLoad = async (event) => {
 	const session = await event.locals.getSession();
 	const userId = session?.user?.id;
@@ -13,7 +17,8 @@ export const load: PageServerLoad = async (event) => {
 	});
 
 	return {
-		rooms: roomsForUser
+		rooms: roomsForUser,
+		pathname: event.url.pathname
 	};
 };
 

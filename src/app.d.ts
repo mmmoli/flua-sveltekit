@@ -17,4 +17,6 @@ declare global {
 	}
 }
 
+import '@types/dom-view-transitions';
+
 export {};

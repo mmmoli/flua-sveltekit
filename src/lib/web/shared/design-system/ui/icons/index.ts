@@ -1,6 +1,7 @@
-import { ArrowLeft, Loader2 } from 'lucide-svelte';
+import { ArrowLeft, Loader2, Squirrel } from 'lucide-svelte';
 
 export const I = {
+	ArrowLeft,
 	Loader: Loader2,
-	ArrowLeft
+	Squirrel
 };
