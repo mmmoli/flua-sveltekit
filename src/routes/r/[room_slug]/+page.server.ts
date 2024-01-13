@@ -1,6 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
-import { loadManagePage } from '$lib/web/pages/room-manage/api/load-manage-page';
+import { loadManagePage } from '~pages/room-manage/api/load-manage-page';
+import type { PageServerLoad } from '../../r/[room_slug]/$types';
 
 export const load: PageServerLoad = async (event) => {
 	const redirectAuthUrl = '/';

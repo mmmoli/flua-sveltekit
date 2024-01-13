@@ -1,6 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit';
-import type { PageServerLoad } from './view/$types';
 import { loadManagePage } from '$lib/web/pages/room-manage/api/load-manage-page';
+import type { PageServerLoad } from '../../rooms/[room_slug]/$types';
 
 export const load: PageServerLoad = async (event) => {
 	const session = await event.locals.getSession();
