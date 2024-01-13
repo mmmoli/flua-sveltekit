@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { Masthead } from '$lib/web/widgets/masthead';
 	import { Toaster } from '~ui/sonner';
+	import { Box } from '~ui/box';
 	import '@fontsource-variable/overpass-mono';
 </script>
 
-<Toaster />
-<Masthead />
-<div class="m-4">
+<Box padding="none" class="m-1">
+	<Masthead />
 	<slot />
-</div>
+</Box>
+
+<Toaster />

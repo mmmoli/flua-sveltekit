@@ -4,6 +4,7 @@
 	import { I } from '~ui/icons';
 	import { T } from '~ui/typography';
 	import { Button } from '~ui/button';
+	import { Box } from '~ui/box';
 
 	const { send, snapshot: state } = useMachine(callMachine);
 
@@ -21,50 +22,55 @@
 	}, {}) as Metadata;
 </script>
 
-<div class="m-2 border border-black p-2">
-	<div class="flex items-center space-x-2">
-		<T.Lead>You&apos;re {metadata.label}</T.Lead>
-		{#if changing}
-			<I.Loader class="mr-2 h-4 w-4 animate-spin" />
-		{/if}
-	</div>
+<Box thickness="none" class="flex-row flex-wrap">
+	<div class="aspect-video w-full bg-foreground md:w-2/3" />
+	<Box thickness="none" class="w-full bg-red-200 md:w-1/3">
+		<slot name="titles" />
+	</Box>
+</Box>
 
-	<div class="flex space-x-2">
+<div class="flex items-center space-x-2">
+	<T.Lead>You&apos;re {metadata.label}</T.Lead>
+	{#if changing}
+		<I.Loader class="mr-2 h-4 w-4 animate-spin" />
+	{/if}
+</div>
+
+<div class="flex space-x-2">
+	<Button
+		on:click={() => {
+			send({ type: 'JOIN' });
+		}}
+		disabled={queued}
+	>
+		Join
+	</Button>
+	<Button
+		on:click={() => {
+			send({ type: 'LEAVE' });
+		}}
+		disabled={!queued}
+	>
+		Leave
+	</Button>
+	<Button
+		on:click={() => {
+			send({ type: 'FINISH' });
+		}}
+		disabled={!speaking}
+	>
+		Finish
+	</Button>
+	{#if queued}
 		<Button
 			on:click={() => {
-				send({ type: 'JOIN' });
+				send({ type: 'SPEAK' });
 			}}
-			disabled={queued}
+			disabled={speaking}
+			size="sm"
+			variant="ghost"
 		>
-			Join
+			Speak
 		</Button>
-		<Button
-			on:click={() => {
-				send({ type: 'LEAVE' });
-			}}
-			disabled={!queued}
-		>
-			Leave
-		</Button>
-		<Button
-			on:click={() => {
-				send({ type: 'FINISH' });
-			}}
-			disabled={!speaking}
-		>
-			Finish
-		</Button>
-		{#if queued}
-			<Button
-				on:click={() => {
-					send({ type: 'SPEAK' });
-				}}
-				disabled={speaking}
-				size="sm"
-				variant="ghost"
-			>
-				Speak
-			</Button>
-		{/if}
-	</div>
+	{/if}
 </div>

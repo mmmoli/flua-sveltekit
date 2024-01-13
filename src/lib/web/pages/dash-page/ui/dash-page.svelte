@@ -2,6 +2,7 @@
 	import { RequestRoomButton } from '~features/rooms/request-room';
 	import { RoomListForUser } from '~features/rooms/room-list-for-user';
 	import { RoomCount } from '~features/rooms/room-count';
+	import { NavLayout } from '~pages/nav-layout';
 	import { T } from '~ui/typography';
 	import type { PageData } from '../../../../../routes/dash/$types';
 
@@ -17,20 +18,22 @@
 	<title>Dashboard</title>
 </svelte:head>
 
-<div class="flex flex-col space-y-8">
-	<T.H1>Dash</T.H1>
-	<RoomCount />
-	<RequestRoomButton action={actions.requestRoom} />
+<NavLayout>
+	<div class="flex flex-col space-y-8">
+		<T.H1>Dash</T.H1>
+		<RoomCount />
+		<RequestRoomButton action={actions.requestRoom} />
 
-	{#await data.rooms}
-		Loading rooms...
-	{:then result}
-		{#if result.data}
-			<RoomListForUser rooms={result.data} />
-		{:else}
+		{#await data.rooms}
+			Loading rooms...
+		{:then result}
+			{#if result.data}
+				<RoomListForUser rooms={result.data} />
+			{:else}
+				<p>error loading rooms</p>
+			{/if}
+		{:catch error}
 			<p>error loading rooms</p>
-		{/if}
-	{:catch error}
-		<p>error loading rooms</p>
-	{/await}
-</div>
+		{/await}
+	</div>
+</NavLayout>

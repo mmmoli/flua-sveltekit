@@ -2,9 +2,10 @@
 	import { UserButton } from '~features/auth/user-button';
 	import { ModeToggleButton } from '~features/mode-toggle-button';
 	import { Logomark } from '~ui/logomark';
+	import { Box } from '~ui/box';
 </script>
 
-<div class="m-4 flex justify-between">
+<Box pattern="b" class="flex-row justify-between">
 	<div class="flex flex-grow items-center justify-start space-x-2">
 		<a href="/" data-testid="masthead-brand">
 			<Logomark size="md" />
@@ -14,4 +15,4 @@
 		<UserButton />
 		<ModeToggleButton />
 	</div>
-</div>
+</Box>

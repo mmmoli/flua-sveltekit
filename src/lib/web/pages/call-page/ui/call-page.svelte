@@ -9,14 +9,16 @@
 </script>
 
 <svelte:head>
-	<title>{room?.name}</title>
+	<title>{room?.name} / Uninterrupted / Flua</title>
 </svelte:head>
 
-<a href={routes.dashPage()} class="flex items-center">
-	<I.ArrowLeft class="inline" />Rooms
-</a>
+<Call>
+	<header slot="titles">
+		<a href={routes.dashPage()} class="flex items-center">
+			<I.ArrowLeft class="inline" />Rooms
+		</a>
 
-<T.H1>{room?.name}</T.H1>
-<T.Lead>{room?.description}</T.Lead>
-
-<Call />
+		<T.H1>{room?.name}</T.H1>
+		<T.Lead>{room?.description}</T.Lead>
+	</header>
+</Call>

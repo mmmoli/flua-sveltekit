@@ -1,6 +1,6 @@
 <script lang="ts">
 	import '../app.pcss';
-	import { MainLayout } from '$lib/web/app/layouts/main-layout';
+	import { MainLayout } from '~pages/main-layout';
 </script>
 
 <MainLayout>
