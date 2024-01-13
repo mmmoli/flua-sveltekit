@@ -16,9 +16,5 @@ export const requestRoomAction = async (event: RequestEvent) => {
 		});
 	const room = result.value();
 
-	redirect(303, routes.roomManagePage({ roomSlug: room.slug }));
-
-	return {
-		room
-	};
+	redirect(303, routes.manageRoomPage({ roomSlug: room.slug }));
 };
