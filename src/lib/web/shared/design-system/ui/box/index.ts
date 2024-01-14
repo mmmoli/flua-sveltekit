@@ -10,7 +10,8 @@ const boxVariants = tv({
 		},
 		padding: {
 			none: 'p0',
-			md: 'p-3'
+			md: 'p-3',
+			lg: 'p-8'
 		}
 	},
 	defaultVariants: {

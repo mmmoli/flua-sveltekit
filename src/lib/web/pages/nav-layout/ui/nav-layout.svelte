@@ -8,7 +8,7 @@
 	<Box thickness="none" class="w-full md:w-1/6">
 		<Nav activeUrl={currentUrl} />
 	</Box>
-	<Box class="w-full md:w-5/6" pattern="l">
+	<Box class="w-full md:w-5/6" pattern="l" padding="none">
 		<slot />
 	</Box>
 </div>

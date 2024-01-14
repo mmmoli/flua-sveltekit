@@ -15,7 +15,7 @@ const config = {
 			'~pages/*': 'src/lib/web/pages/*',
 			'~entities/*': 'src/lib/web/entities/*',
 			'~features/*': 'src/lib/web/features/*',
-			'~widgets/*': 'src/lib/web/widget/*',
+			'~widgets/*': 'src/lib/web/widgets/*',
 			'~commands/*': 'src/lib/server/commands/*',
 			'~queries/*': 'src/lib/server/queries/*',
 		},		

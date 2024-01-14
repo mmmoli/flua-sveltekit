@@ -1,17 +1,17 @@
 <script lang="ts">
 	import { NavLayout } from '~pages/nav-layout';
-	import { T } from '~ui/typography';
+	import { Banner } from '~entities/banner';
+	import { ProfileSection } from '~widgets/account/profile-section';
+	import { BillingSection } from '~widgets/account/billing-section';
+
 	import type { PageData } from '../../../../../routes/account/$types';
+
 	export let data: PageData;
 	const currentUrl = data?.pathname;
 </script>
 
-<svelte:head>
-	<title>Account</title>
-</svelte:head>
-
 <NavLayout {currentUrl}>
-	<div class="flex flex-col space-y-8">
-		<T.H1>Account</T.H1>
-	</div>
+	<Banner heading="Account" />
+	<ProfileSection />
+	<BillingSection />
 </NavLayout>

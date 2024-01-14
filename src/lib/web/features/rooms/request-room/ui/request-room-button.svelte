@@ -18,7 +18,7 @@
 		// };
 	}}
 >
-	<Button variant="default" type="submit" disabled={sending}>
+	<Button variant="secondary" type="submit" disabled={sending}>
 		{#if sending}
 			<I.Loader class="mr-2 h-4 w-4 animate-spin" />
 		{/if}

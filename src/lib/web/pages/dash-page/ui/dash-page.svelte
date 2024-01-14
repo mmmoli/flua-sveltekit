@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { NavLayout } from '~pages/nav-layout';
-	import { T } from '~ui/typography';
+	import { Banner } from '~entities/banner';
 	import type { PageData } from '../../../../../routes/dash/$types';
 
 	export let data: PageData;
@@ -15,7 +15,5 @@
 </svelte:head>
 
 <NavLayout {currentUrl}>
-	<div class="flex flex-col space-y-8">
-		<T.H1>Dash</T.H1>
-	</div>
+	<Banner heading="Dash" lead="Do stuff here" />
 </NavLayout>

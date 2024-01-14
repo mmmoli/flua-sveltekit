@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { T } from '~ui/typography';
-	import { buttonVariants } from '~ui/button';
-	import { routes } from '$lib/web/shared/config/routes';
-	import type { PageData } from '../../../../../routes/manage/[room_slug]/$types';
+	import { Button } from '~ui/button';
+	import { Box } from '~ui/box';
+	import { Banner } from '~entities/banner';
+	import { routes } from '~shared/config/routes';
+	import type { PageData } from '../../../../../routes/rooms/[room_slug]/$types';
 	import { NavLayout } from '~pages/nav-layout';
 
 	export let data: PageData;
@@ -17,10 +18,10 @@
 </script>
 
 <NavLayout {currentUrl}>
-	<a href={dashPageUrl} class={buttonVariants({ variant: 'link' })}>Rooms</a>
-
-	<T.H1>{room.name}</T.H1>
-	<T.Lead>{room.description}</T.Lead>
-
-	<a href={callPageUrl} class={buttonVariants({ variant: 'link' })}>Join</a>
+	<Banner heading={`Change ${room.name}`} lead={room.description}>
+		<slot slot="actions">
+			<Button variant="secondary" href={callPageUrl}>Enter Room</Button>
+		</slot>
+	</Banner>
+	<Box thickness="none">Form Here</Box>
 </NavLayout>
