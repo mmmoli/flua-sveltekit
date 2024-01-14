@@ -23,7 +23,7 @@
 <NavLayout {currentUrl}>
 	<Banner heading="Rooms">
 		<slot slot="actions">
-			<RequestRoomButton action={actions.requestRoom} />
+			<RequestRoomButton size="lg" action={actions.requestRoom} />
 		</slot>
 	</Banner>
 

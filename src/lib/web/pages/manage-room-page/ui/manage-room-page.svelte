@@ -20,7 +20,7 @@
 <NavLayout {currentUrl}>
 	<Banner heading={`Change ${room.name}`} lead={room.description}>
 		<slot slot="actions">
-			<Button variant="secondary" href={callPageUrl}>Enter Room</Button>
+			<Button size="lg" variant="secondary" href={callPageUrl}>Enter Room</Button>
 		</slot>
 	</Banner>
 	<Box thickness="none">Form Here</Box>

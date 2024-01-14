@@ -1,9 +1,12 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { I } from '~ui/icons';
-	import { Button } from '~ui/button';
+	import { Button, type ButtonProps } from '~ui/button';
 	export let action: string;
 	let sending = false;
+
+	export let variant: ButtonProps['variant'] = 'secondary';
+	export let size: ButtonProps['size'] = 'default';
 </script>
 
 <form
@@ -18,7 +21,7 @@
 		// };
 	}}
 >
-	<Button variant="secondary" type="submit" disabled={sending}>
+	<Button {variant} {size} type="submit" disabled={sending} {...$$restProps}>
 		{#if sending}
 			<I.Loader class="mr-2 h-4 w-4 animate-spin" />
 		{/if}
