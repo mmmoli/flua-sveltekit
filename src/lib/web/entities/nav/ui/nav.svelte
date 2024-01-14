@@ -7,9 +7,9 @@
 </script>
 
 <nav>
-	<ol class="flex flex-col space-y-2">
+	<ol class="flex flex-wrap">
 		{#each navItems as navItem}
-			<li>
+			<li class="mb-2 mr-2">
 				<NavItem href={navItem.href} label={navItem.label} isActive={isActive(navItem.href)} />
 			</li>
 		{/each}

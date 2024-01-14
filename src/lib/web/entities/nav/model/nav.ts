@@ -7,6 +7,10 @@ export const navItems: NavItemList = [
 		href: routes.dashPage()
 	},
 	{
+		label: 'Rooms',
+		href: routes.roomsPage()
+	},
+	{
 		label: 'Account',
 		href: routes.accountPage()
 	}

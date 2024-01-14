@@ -1,6 +1,6 @@
 import { error, fail, redirect } from '@sveltejs/kit';
 import { load as loadRoom } from '~pages/manage-room-page/api/load';
-import type { PageServerLoad } from '../../manage/[room_slug]/$types';
+import type { PageServerLoad } from './$types';
 
 export const config = {
 	runtime: 'edge'

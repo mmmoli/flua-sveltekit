@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { DashPage } from '~pages/dash-page';
-	import type { PageData } from '../dash/$types';
+	import { RoomsPage } from '~pages/rooms-page';
+	import type { PageData } from '../rooms/$types';
 	export let data: PageData;
 </script>
 
-<DashPage
+<RoomsPage
 	{data}
 	actions={{
 		requestRoom: '?/requestRoom'
