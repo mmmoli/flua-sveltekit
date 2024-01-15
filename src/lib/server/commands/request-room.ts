@@ -1,27 +1,25 @@
-import { RoomRequestPolicy } from '../core/application/policies/room-request-policy';
-import { RoomReadyPolicy } from '../core/application/policies/room-ready-policy';
+import { AfterRoomReadyPolicy } from '../core/application/policies/after-room-ready-policy';
+import { AfterRoomRequestedPolicy } from '../core/application/policies/after-room-requested-policy';
 import {
 	RequestRoomUseCase,
 	type RequestRoomUseCaseDTO
-} from '../core/application/use-cases/request-room';
-import { RoomToInfraAdapter } from '../core/infra/adapters/room-adapters';
+} from '../core/application/use-cases/rooms/request-room.use-case';
 import { roomRepo } from '../core/infra/db';
-import { roomService } from '../core/infra/services';
+import { roomService } from '../core/infra/services/room-service';
 
 export const requestRoomCommand = async (dto: RequestRoomUseCaseDTO) => {
-	const roomReadyPolicy = new RoomReadyPolicy();
-	const presenter = new RoomToInfraAdapter();
+	const afterRoomReadyPolicy = new AfterRoomReadyPolicy({
+		roomRepo
+	});
 
-	const roomRequestPolicy = new RoomRequestPolicy({
+	const afterRoomRequestedPolicy = new AfterRoomRequestedPolicy({
 		roomService,
 		roomRepo,
-		roomReadyPolicy
+		afterRoomReadyPolicy
 	});
 
 	const useCase = new RequestRoomUseCase({
-		roomRepo,
-		roomRequestPolicy,
-		presenter
+		afterRoomRequestedPolicy
 	});
 
 	return useCase.execute(dto);

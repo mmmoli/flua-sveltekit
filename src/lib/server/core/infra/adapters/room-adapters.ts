@@ -1,4 +1,4 @@
-import { RoomBuilder, type Room } from '$lib/server/core/domain/rooms';
+import { Room } from '$lib/server/core/domain/rooms';
 import {
 	isReadyRoomStatus,
 	RoomStatusSchema,
@@ -56,7 +56,7 @@ export class RoomToInfraAdapter implements IAdapter<Room, RoomModel> {
 
 export class DbToRoomAdapter implements IAdapter<DbRoom, Room> {
 	build(input: DbRoom): IResult<Room> {
-		const builder = new RoomBuilder({ ownerId: input.ownerId });
+		const builder = Room.builder({ ownerId: input.ownerId });
 		const parseStatus = RoomStatusSchema.safeParse({
 			label: input.status,
 			namespace: input.metadata?.externalData?.namespace,

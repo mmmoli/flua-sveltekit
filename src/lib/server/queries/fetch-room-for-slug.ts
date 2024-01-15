@@ -1,7 +1,7 @@
 import {
 	FetchRoomForSlugUseCase,
 	type FetchRoomForSlugUseCaseDTO
-} from '$lib/server/core/application/use-cases';
+} from '../core/application/use-cases/rooms/fetch-room-for-slug.use-case';
 import { RoomToInfraAdapter } from '../core/infra/adapters/room-adapters';
 import { roomRepo } from '../core/infra/db';
 

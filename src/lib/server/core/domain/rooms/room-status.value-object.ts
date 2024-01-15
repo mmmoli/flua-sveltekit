@@ -54,4 +54,8 @@ export class RoomStatus extends ValueObject<RoomStatusProps> {
 
 		return Ok(new RoomStatus(props));
 	}
+
+	get isReady(): boolean {
+		return isReadyRoomStatus(this.props);
+	}
 }

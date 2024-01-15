@@ -1,11 +1,17 @@
-import { Fail, Ok, type IResult, type IUseCase, type IAdapter, Combine } from 'rich-domain';
-import type { ListRoomsForOwnerIdUseCaseDTO } from './list-rooms-for-owner-id-use-case-dto';
-import { Room, type RoomRepoTrait } from '$lib/server/core/domain/rooms';
+import { Ok, type IResult, type IUseCase, Fail, type IAdapter, Combine } from 'rich-domain';
+import { z } from 'zod';
+import { Room, type RoomRepoTrait } from '../../../domain/rooms';
 
 export interface ListRoomsForOwnerIdUseCaseDeps<T> {
 	roomRepo: RoomRepoTrait;
 	presenter: IAdapter<Room, T>;
 }
+
+export const ListRoomsForOwnerIdUseCaseSchema = z.object({
+	ownerId: z.string().min(4)
+});
+
+export type ListRoomsForOwnerIdUseCaseDTO = z.infer<typeof ListRoomsForOwnerIdUseCaseSchema>;
 
 export class ListRoomsForOwnerIdUseCase<T>
 	implements IUseCase<ListRoomsForOwnerIdUseCaseDTO, IResult<T[]>>

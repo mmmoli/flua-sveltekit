@@ -14,7 +14,7 @@ export const requestRoomAction = async (event: RequestEvent) => {
 		return fail(500, {
 			message: result.error()
 		});
-	const room = result.value();
+	const roomSlug = result.value();
 
-	redirect(303, routes.manageRoomPage({ roomSlug: room.slug }));
+	redirect(303, routes.manageRoomPage({ roomSlug }));
 };

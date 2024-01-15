@@ -67,6 +67,7 @@ export class RoomBuilder {
 	public build(): IResult<Room> {
 		const result = Combine([this.nameResult, this.descriptionResult, this.slugResult]);
 		if (result.isFail()) return Fail(result.error());
+		const now = new Date();
 
 		return Room.create({
 			id: this.id,
@@ -75,8 +76,8 @@ export class RoomBuilder {
 			ownerId: this.ownerId,
 			slug: this.slugResult.value(),
 			status: this.statusResult.value(),
-			createdAt: this.createdAt,
-			updatedAt: this.updatedAt
+			createdAt: this.createdAt ?? now,
+			updatedAt: this.updatedAt ?? now
 		});
 	}
 }

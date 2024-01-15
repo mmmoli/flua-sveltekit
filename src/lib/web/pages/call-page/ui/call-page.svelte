@@ -14,7 +14,7 @@
 
 <Call>
 	<header slot="titles">
-		<a href={routes.dashPage()} class="flex items-center">
+		<a href={routes.roomsPage()} class="flex items-center">
 			<I.ArrowLeft class="inline" />Rooms
 		</a>
 

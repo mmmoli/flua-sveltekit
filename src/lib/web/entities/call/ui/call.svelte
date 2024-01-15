@@ -20,11 +20,18 @@
 		const value = $state.getMeta()[key];
 		return Object.assign(acc, value);
 	}, {}) as Metadata;
+
+	// function handleKeydown(evt: KeyboardEvent) {
+	// 	if (evt.code !== 'Space') return;
+	// 	$state.matches('queue') ? send({ type: 'JOIN' }) : send({ type: 'LEAVE' });
+	// }
 </script>
+
+<!-- <svelte:window on:keydown={handleKeydown} /> -->
 
 <Box thickness="none" class="flex-row flex-wrap">
 	<div class="aspect-video w-full bg-foreground md:w-2/3" />
-	<Box thickness="none" class="w-full bg-red-200 md:w-1/3">
+	<Box thickness="none" class="w-full md:w-1/3">
 		<slot name="titles" />
 	</Box>
 </Box>

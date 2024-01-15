@@ -1,11 +1,18 @@
-import { Fail, Ok, type IResult, type IUseCase, type IAdapter } from 'rich-domain';
-import type { FetchRoomForSlugUseCaseDTO } from './fetch-room-for-slug-use-case-dto';
-import { Room, type RoomRepoTrait } from '$lib/server/core/domain/rooms';
+import { Ok, type IResult, type IUseCase, Fail, type IAdapter } from 'rich-domain';
+import { z } from 'zod';
+import { Room, type RoomRepoTrait } from '../../../domain/rooms';
 
 export interface FetchRoomForSlugUseCaseDeps<T> {
 	roomRepo: RoomRepoTrait;
 	presenter: IAdapter<Room, T>;
 }
+
+export const FetchRoomForSlugUseCaseSchema = z.object({
+	slug: z.string(),
+	userId: z.string()
+});
+
+export type FetchRoomForSlugUseCaseDTO = z.infer<typeof FetchRoomForSlugUseCaseSchema>;
 
 export class FetchRoomForSlugUseCase<T>
 	implements IUseCase<FetchRoomForSlugUseCaseDTO, IResult<T>>
@@ -14,7 +21,7 @@ export class FetchRoomForSlugUseCase<T>
 
 	async execute(dto: FetchRoomForSlugUseCaseDTO): Promise<IResult<T>> {
 		try {
-			const roomResult = await this.deps.roomRepo.fetchBySlug(dto.slug.value);
+			const roomResult = await this.deps.roomRepo.fetchBySlug(dto.slug);
 			if (roomResult.isFail()) return Fail(roomResult.error());
 			const room = roomResult.value();
 

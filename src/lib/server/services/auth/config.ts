@@ -3,6 +3,10 @@ import GitHub from '@auth/sveltekit/providers/github';
 import { AUTH_GITHUB_CLIENT_ID, AUTH_GITHUB_CLIENT_SECRET } from '$env/static/private';
 import { DrizzleAdapter } from '@auth/drizzle-adapter';
 import { db } from '../drizzle';
+import { User } from '$lib/server/core/domain/users';
+import { UserRegisteredEvent } from '$lib/server/core/domain/users/user-registered.domain-event';
+import { UserRegisteredPolicy } from '$lib/server/core/application/policies/after-user-registered-policy';
+import { DomainEvents } from 'rich-domain';
 
 export const authHandle = SvelteKitAuth({
 	callbacks: {
@@ -15,14 +19,17 @@ export const authHandle = SvelteKitAuth({
 		})
 	},
 	events: {
-		createUser: async ({ user }) => {
-			console.log('createUser', user);
-			// await registerUserCommand({
-			// 	id: user.id,
-			// 	email: String(user.email),
-			// 	name: String(user.name),
-			// 	avatarUrl: String(user.image)
-			// });
+		createUser: async ({ user: data }) => {
+			const userResult = User.builder()
+				.withAvatarUrl(data.image!)
+				.withEmail(data.email!)
+				.withId(data.id!)
+				.withName(data.name ?? data.email!)
+				.build();
+			if (userResult.isFail()) throw new Error(userResult.error());
+			const user = userResult.value();
+			user.addEvent(new UserRegisteredEvent(), 'REPLACE_DUPLICATED');
+			user.dispatchEvent(UserRegisteredEvent.name, new UserRegisteredPolicy());
 		}
 	},
 	adapter: DrizzleAdapter(db),

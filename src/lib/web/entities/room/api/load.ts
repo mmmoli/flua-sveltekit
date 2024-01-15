@@ -7,9 +7,7 @@ export interface LoadManagePage {
 
 export const load = async ({ roomSlug, userId }: LoadManagePage) => {
 	return fetchRoomForSlugQuery({
-		slug: {
-			value: roomSlug
-		},
+		slug: roomSlug,
 		userId
 	}).then((result) => result.toObject());
 };

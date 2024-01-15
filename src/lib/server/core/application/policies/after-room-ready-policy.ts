@@ -1,9 +1,14 @@
-import type { Room } from '$lib/server/core/domain/rooms';
+import type { EventHandler, HandlerPayload } from 'rich-domain';
+import type { Room, RoomRepoTrait } from '../../domain/rooms';
 import { emailService } from '$lib/server/services/email';
-import { type EventHandler, type HandlerPayload } from 'rich-domain';
 import Welcome from '$lib/server/services/email/emails/welcome.svelte';
 
-export class RoomReadyPolicy implements EventHandler<Room, void> {
+export interface AfterRoomReadyPolicyDeps {
+	roomRepo: RoomRepoTrait;
+}
+
+export class AfterRoomReadyPolicy implements EventHandler<Room, void> {
+	constructor(protected readonly deps: AfterRoomReadyPolicyDeps) {}
 	async execute(data: HandlerPayload<Room>): Promise<void> {
 		try {
 			emailService.sendEmail({

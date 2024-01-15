@@ -6,6 +6,7 @@ import type { RoomName } from './room-name.value-object';
 import { RoomReadyEvent } from './room-ready.domain-event';
 import type { RoomDescription } from './room-description.value-object';
 import type { RoomSlug } from './room-slug.value-object';
+import { type RoomBuilderProps, RoomBuilder } from './room.builder';
 
 export interface RoomProps {
 	id?: UID;
@@ -14,8 +15,8 @@ export interface RoomProps {
 	slug: RoomSlug;
 	status: RoomStatus;
 	description?: RoomDescription;
-	createdAt?: Date;
-	updatedAt?: Date;
+	createdAt: Date;
+	updatedAt: Date;
 }
 
 export class Room extends Aggregate<RoomProps> {
@@ -27,14 +28,12 @@ export class Room extends Aggregate<RoomProps> {
 	}
 
 	public static create(props: RoomProps): IResult<Room> {
-		const now = new Date();
-		const propsWithDefaults: RoomProps = {
-			...props,
-			createdAt: props.createdAt || now,
-			updatedAt: props.updatedAt || now
-		};
-		const room = new Room(propsWithDefaults);
+		const room = new Room(props);
 		return Ok(room);
+	}
+
+	public static builder(props: RoomBuilderProps): RoomBuilder {
+		return new RoomBuilder(props);
 	}
 
 	public get status(): RoomStatus {

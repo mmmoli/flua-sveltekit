@@ -1,7 +1,7 @@
 import {
 	ListRoomsForOwnerIdUseCase,
 	type ListRoomsForOwnerIdUseCaseDTO
-} from '$lib/server/core/application/use-cases';
+} from '../core/application/use-cases/rooms/list-rooms-for-owner-id.use-case';
 import { RoomToInfraAdapter } from '../core/infra/adapters/room-adapters';
 import { roomRepo } from '../core/infra/db';
 

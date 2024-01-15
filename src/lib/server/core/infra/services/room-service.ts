@@ -20,3 +20,5 @@ export class RoomService implements RoomServiceTrait {
 		return Ok();
 	}
 }
+
+export const roomService = new RoomService();
