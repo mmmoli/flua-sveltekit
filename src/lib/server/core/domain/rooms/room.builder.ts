@@ -25,6 +25,24 @@ export class RoomBuilder {
 		this.slugResult = RoomSlug.createFromName(this.nameResult.value());
 	}
 
+	fromRoom(room: Room): RoomBuilder {
+		const id = room.get('id')?.value()!;
+		const builder = new RoomBuilder({
+			ownerId: room.get('ownerId').value()
+		})
+			.withId(id)
+			.withName(room.get('name').get('value'))
+			.withStatus(room.get('status').toObject())
+			.withCreatedAt(room.get('createdAt'))
+			.withUpdatedAt(room.get('updatedAt'))
+			.withSlug(room.get('slug').get('value'));
+
+		const description = room.get('description');
+		if (description) builder.withDescription(description.get('value'));
+
+		return builder;
+	}
+
 	withName(name: string): RoomBuilder {
 		this.nameResult = RoomName.create({ value: name });
 		return this;

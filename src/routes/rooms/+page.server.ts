@@ -1,27 +1,20 @@
-import { redirect, type Actions } from '@sveltejs/kit';
-import type { PageServerLoad } from './$types';
-import { requestRoomAction as requestRoom } from '~features/rooms/request-room/api/request-room-action';
-import { load as loadRoomsPage } from '~pages/rooms-page/api/load';
+import type { PageServerLoad } from '../rooms/$types';
+import { actions, load as loadImpl } from '~pages/rooms-page/api';
+import { userIdOrRedirect } from '~shared/utils/auth/user-id-or-redirect';
 
 export const config = {
 	runtime: 'edge'
 };
 
+// Rule: get props here, but do no logic
+// Return ASAP
 export const load: PageServerLoad = async (event) => {
-	const session = await event.locals.getSession();
-	const userId = session?.user?.id;
-	if (!userId) throw redirect(303, '/');
+	const userId = await userIdOrRedirect(event.locals);
 
-	const { roomsForUser } = await loadRoomsPage({
-		userId
-	});
-
-	return {
-		rooms: roomsForUser,
+	return loadImpl({
+		userId,
 		pathname: event.url.pathname
-	};
+	});
 };
 
-export const actions = {
-	requestRoom
-} satisfies Actions;
+export { actions };

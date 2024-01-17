@@ -2,7 +2,6 @@
 	import { enhance } from '$app/forms';
 	import { I } from '~ui/icons';
 	import { Button, type ButtonProps } from '~ui/button';
-	export let action: string;
 	let sending = false;
 
 	export let variant: ButtonProps['variant'] = 'secondary';
@@ -11,7 +10,7 @@
 
 <form
 	method="POST"
-	{action}
+	action="?/requestRoomAction"
 	use:enhance={() => {
 		sending = true;
 		// return ({ update }) => {

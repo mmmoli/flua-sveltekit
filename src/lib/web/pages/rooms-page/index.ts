@@ -1,1 +1,1 @@
-export { default as RoomsPage } from './ui/rooms-page.svelte';
+export { default as Page } from './ui/rooms-page.svelte';

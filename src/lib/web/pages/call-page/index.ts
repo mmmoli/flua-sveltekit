@@ -1,1 +1,1 @@
-export { default as CallPage } from './ui/call-page.svelte';
+export { default as Page } from './ui/call-page.svelte';

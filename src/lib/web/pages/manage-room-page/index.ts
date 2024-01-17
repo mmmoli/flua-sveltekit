@@ -1,1 +1,1 @@
-export { default as RoomManagePage } from './ui/manage-room-page.svelte';
+export { default as Page } from './ui/manage-room-page.svelte';

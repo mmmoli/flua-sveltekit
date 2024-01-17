@@ -1,7 +1,11 @@
 <script lang="ts">
-	import { CallPage } from '~pages/call-page';
+	import { Page } from '~pages/call-page';
 	import type { PageData } from '../../join/[room_slug]/$types';
 	export let data: PageData;
+	let key = 0;
+	$: if (data) key++;
 </script>
 
-<CallPage {data} />
+{#key key}
+	<Page {data} />
+{/key}

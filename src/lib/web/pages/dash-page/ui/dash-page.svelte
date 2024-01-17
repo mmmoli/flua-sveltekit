@@ -2,12 +2,8 @@
 	import { NavLayout } from '~pages/nav-layout';
 	import { Banner } from '~entities/banner';
 	import type { PageData } from '../../../../../routes/dash/$types';
-
 	export let data: PageData;
 	const currentUrl = data?.pathname;
-
-	interface ServerActions {}
-	export let actions: ServerActions;
 </script>
 
 <svelte:head>

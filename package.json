@@ -60,6 +60,7 @@
 		"clsx": "^2.1.0",
 		"dotenv": "^16.3.1",
 		"drizzle-orm": "^0.29.1",
+		"formsnap": "^0.4.2",
 		"lucide-svelte": "^0.298.0",
 		"mode-watcher": "^0.1.2",
 		"resend": "^2.1.0",

@@ -56,6 +56,7 @@ export class DrizzleRoomRepo implements RoomRepoTrait {
 					target: rooms.id,
 					set: {
 						createdAt: model.createdAt,
+						description: model.description,
 						metadata: model.metadata,
 						name: model.name,
 						ownerId: model.ownerId,

@@ -1,14 +1,12 @@
-import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
+import { userIdOrRedirect } from '~shared/utils/auth/user-id-or-redirect';
 
 export const config = {
 	runtime: 'edge'
 };
 
 export const load: PageServerLoad = async (event) => {
-	const session = await event.locals.getSession();
-	const userId = session?.user?.id;
-	if (!userId) throw redirect(303, '/');
+	const userId = await userIdOrRedirect(event.locals);
 
 	return {
 		pathname: event.url.pathname

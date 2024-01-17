@@ -1,7 +1,11 @@
 <script lang="ts">
-	import { RoomManagePage } from '~pages/manage-room-page';
+	import { Page } from '~pages/manage-room-page';
 	import type { PageData } from '../../rooms/[room_slug]/$types';
 	export let data: PageData;
+	let key = 0;
+	$: if (data) key++;
 </script>
 
-<RoomManagePage {data} />
+{#key key}
+	<Page {data} />
+{/key}

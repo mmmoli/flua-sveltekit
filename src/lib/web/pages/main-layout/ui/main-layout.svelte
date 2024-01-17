@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { Masthead } from '~widgets/masthead';
-	import { Footer } from '~widgets/footer';
+	import { Masthead, Footer } from '~widgets/navigation';
 	import { Toaster } from '~ui/sonner';
 	import { Box } from '~ui/box';
 	import { Analytics } from '~entities/analytics';

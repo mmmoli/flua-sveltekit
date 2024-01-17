@@ -1,12 +1,11 @@
 <script lang="ts">
-	import { DashPage } from '~pages/dash-page';
+	import { Page } from '~pages/dash-page';
 	import type { PageData } from '../dash/$types';
 	export let data: PageData;
+	let key = 0;
+	$: if (data) key++;
 </script>
 
-<DashPage
-	{data}
-	actions={{
-		requestRoom: '?/requestRoom'
-	}}
-/>
+{#key key}
+	<Page {data} />
+{/key}

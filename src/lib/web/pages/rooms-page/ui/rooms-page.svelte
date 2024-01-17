@@ -9,11 +9,6 @@
 
 	export let data: PageData;
 	const currentUrl = data?.pathname;
-
-	interface ServerActions {
-		requestRoom: string;
-	}
-	export let actions: ServerActions;
 </script>
 
 <svelte:head>
@@ -23,7 +18,7 @@
 <NavLayout {currentUrl}>
 	<Banner heading="Rooms">
 		<slot slot="actions">
-			<RequestRoomButton size="lg" action={actions.requestRoom} />
+			<RequestRoomButton size="lg" />
 		</slot>
 	</Banner>
 
