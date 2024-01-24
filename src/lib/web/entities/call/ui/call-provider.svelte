@@ -6,6 +6,8 @@
 
 <RealtimeProvider id={roomId}>
 	<Call>
-		<slot />
+		<svelte:fragment slot="call-queue"><slot name="call-queue" /></svelte:fragment>
+		<svelte:fragment slot="call-video"><slot name="call-video" /></svelte:fragment>
+		<svelte:fragment slot="call-titles"><slot name="call-titles" /></svelte:fragment>
 	</Call>
 </RealtimeProvider>

@@ -6,11 +6,8 @@ export type ParticipantEvent =
 	| { type: 'FINISH' }
 	| { type: 'SPEAK' };
 
-export type CallContext = {};
-
 export const callMachine = setup({
 	types: {} as {
-		context: CallContext;
 		events: ParticipantEvent;
 	},
 	actions: {
@@ -30,7 +27,6 @@ export const callMachine = setup({
 }).createMachine({
 	id: 'call',
 	initial: 'idle',
-	context: {},
 	states: {
 		idle: {
 			meta: {

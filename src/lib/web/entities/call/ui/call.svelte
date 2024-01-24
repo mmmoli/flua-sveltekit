@@ -15,11 +15,11 @@
 	import SpeakerPosition from './speaker-position.svelte';
 	import { T } from '~ui/typography';
 	import Queue from './queue.svelte';
+	import { setContext } from 'svelte';
 
 	const room = get(roomStore);
-	const me = useSelf();
-	const others = useOthers();
-	const { queue, userIdIsSpeaker } = useQueue(others, me);
+
+	const { queue, userIdIsSpeaker } = useQueue(useOthers(), useSelf());
 
 	$: userId = $page.data.session?.user?.id;
 
@@ -37,8 +37,19 @@
 
 	$: queued = $snapshot.tags.has('queued');
 
+	const controls = {
+		join: () => send({ type: 'JOIN' }),
+		leave: () => send({ type: 'LEAVE' })
+	};
+
+	setContext('controls', controls);
+
 	$: {
-		isSpeaker ? send({ type: 'SPEAK' }) : send({ type: 'FINISH' });
+		if (isSpeaker) {
+			send({ type: 'SPEAK' });
+		} else {
+			send({ type: 'FINISH' });
+		}
 	}
 </script>
 
@@ -72,4 +83,12 @@
 	<SpeakerPosition position={$queue.findIndex((person) => person.id === userId)} />
 </div>
 
-<slot />
+<div class="flex">
+	<slot name="call-video" />
+	<slot name="call-titles" />
+	<pre>
+		{JSON.stringify({ queue }, null, 2)}
+	</pre>
+</div>
+
+<slot name="call-queue" />
