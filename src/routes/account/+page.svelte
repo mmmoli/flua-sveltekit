@@ -1,7 +1,15 @@
 <script lang="ts">
-	import { AccountPage } from '~pages/account-page';
 	import type { PageData } from '../account/$types';
+	import { Banner } from '~entities/banner';
+	import { NavLayout } from '~pages/nav-layout';
+	import { BillingSection } from '~widgets/account/billing-section';
+	import { ProfileSection } from '~widgets/account/profile-section';
 	export let data: PageData;
+	const currentUrl = data?.pathname;
 </script>
 
-<AccountPage {data} />
+<NavLayout {currentUrl}>
+	<Banner heading="Account" />
+	<ProfileSection />
+	<BillingSection />
+</NavLayout>

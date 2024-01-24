@@ -1,5 +1,7 @@
+import { actions as requestRoomActions } from '~features/rooms/request-room/api/actions';
+import { type Actions } from '@sveltejs/kit';
 import type { PageServerLoad } from '../rooms/$types';
-import { actions, load as loadImpl } from '~pages/rooms-page/api';
+import { fetchRoomListForOwnerQuery } from '~queries/list-rooms-for-owner-id';
 import { userIdOrRedirect } from '~shared/utils/auth/user-id-or-redirect';
 
 export const config = {
@@ -11,10 +13,16 @@ export const config = {
 export const load: PageServerLoad = async (event) => {
 	const userId = await userIdOrRedirect(event.locals);
 
-	return loadImpl({
-		userId,
+	const rooms = fetchRoomListForOwnerQuery({
+		ownerId: userId
+	}).then((result) => result.toObject());
+
+	return {
+		rooms,
 		pathname: event.url.pathname
-	});
+	};
 };
 
-export { actions };
+export const actions: Actions = {
+	...requestRoomActions
+};

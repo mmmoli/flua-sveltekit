@@ -1,1 +1,1 @@
-export * from '~shared/services/realtime/api/server';
+export * from '~shared/services/realtime/api/server-auth';

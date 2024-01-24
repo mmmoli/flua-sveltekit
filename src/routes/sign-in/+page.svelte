@@ -1,5 +1,5 @@
-<script lang="ts">
-	import { SignInPage } from '$lib/web/pages/sign-in-page';
-</script>
+<svelte:head>
+	<title>Flua: Sign In</title>
+</svelte:head>
 
-<SignInPage />
+<div>Sign in</div>

@@ -6,7 +6,7 @@ export const config = {
 };
 
 export const load: PageServerLoad = async (event) => {
-	const userId = await userIdOrRedirect(event.locals);
+	await userIdOrRedirect(event.locals);
 
 	return {
 		pathname: event.url.pathname

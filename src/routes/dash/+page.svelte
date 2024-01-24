@@ -1,11 +1,15 @@
 <script lang="ts">
-	import { Page } from '~pages/dash-page';
+	import { Banner } from '~entities/banner';
+	import { NavLayout } from '~pages/nav-layout';
 	import type { PageData } from '../dash/$types';
 	export let data: PageData;
-	let key = 0;
-	$: if (data) key++;
+	const currentUrl = data?.pathname;
 </script>
 
-{#key key}
-	<Page {data} />
-{/key}
+<svelte:head>
+	<title>Dashboard</title>
+</svelte:head>
+
+<NavLayout {currentUrl}>
+	<Banner heading="Dash" lead="Do stuff here" />
+</NavLayout>

@@ -1,5 +1,9 @@
 <script lang="ts">
-	import { AboutPage } from '~pages/about-page';
+	import { Banner } from '~entities/banner';
 </script>
 
-<AboutPage />
+<svelte:head>
+	<title>About Flua</title>
+</svelte:head>
+
+<Banner heading="About Flua" />

@@ -1,5 +1,5 @@
-<script lang="ts">
-	import { SignUpPage } from '$lib/web/pages/sign-up-page';
-</script>
+<svelte:head>
+	<title>Flua: Sign Up</title>
+</svelte:head>
 
-<SignUpPage />
+<div>Sign up</div>

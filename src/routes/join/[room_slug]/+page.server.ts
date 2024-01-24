@@ -1,6 +1,6 @@
 import type { PageServerLoad } from '../../join/[room_slug]/$types';
 import { userIdOrRedirect } from '~shared/utils/auth/user-id-or-redirect';
-import { actions, load as loadImpl } from '~pages/call-page/api';
+import { loadRoomSSR } from '~entities/room/api/load-room';
 
 export const config = {
 	runtime: 'edge'
@@ -11,11 +11,13 @@ export const ssr = false;
 export const load: PageServerLoad = async (event) => {
 	const userId = await userIdOrRedirect(event.locals);
 
-	return loadImpl({
-		userId,
+	const room = await loadRoomSSR({
 		roomSlug: event.params.room_slug,
-		pathname: event.url.pathname
+		userId
 	});
-};
 
-export { actions };
+	return {
+		room,
+		pathname: event.url.pathname
+	};
+};
