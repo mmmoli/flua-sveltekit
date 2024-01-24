@@ -43,5 +43,5 @@
 			<Form.Validation />
 		</Form.Item>
 	</Form.Field>
-	<Form.Button variant="secondary" disabled={$submitting}>Submit</Form.Button>
+	<Form.Button variant="secondary" disabled={$submitting}>Save</Form.Button>
 </Form.Root>
