@@ -11,15 +11,19 @@
 	import { get } from 'svelte/store';
 	import { useQueue } from '../model/use-queue';
 	import { useOthers, useSelf } from '~shared/services/realtime';
+	import IsSpeaker from './is-speaker.svelte';
+	import SpeakerPosition from './speaker-position.svelte';
+	import { T } from '~ui/typography';
+	import Queue from './queue.svelte';
 
 	const room = get(roomStore);
 	const me = useSelf();
 	const others = useOthers();
-	const { queue, userIdIsLive } = useQueue(others, me);
+	const { queue, userIdIsSpeaker } = useQueue(others, me);
 
 	$: userId = $page.data.session?.user?.id;
 
-	$: isLive = userIdIsLive(userId);
+	$: isSpeaker = userIdIsSpeaker(userId);
 
 	const connectedMachine = callMachine.provide({
 		actions: {
@@ -32,55 +36,40 @@
 	const { send, snapshot } = useMachine(connectedMachine);
 
 	$: queued = $snapshot.tags.has('queued');
-	$: speaking = $snapshot.tags.has('speaking');
 
 	$: {
-		if (isLive) {
-			console.log('is live');
-			send({ type: 'SPEAK' });
-		} else {
-			console.log('is not');
-			send({ type: 'FINISH' });
-		}
+		isSpeaker ? send({ type: 'SPEAK' }) : send({ type: 'FINISH' });
 	}
 </script>
 
-<div class="flex space-x-2">
-	<Button
-		on:click={() => {
-			send({ type: 'JOIN' });
-		}}
-		disabled={queued}
-	>
-		Join
-	</Button>
-	<Button
-		on:click={() => {
-			send({ type: 'LEAVE' });
-		}}
-		disabled={!queued}
-	>
-		Leave
-	</Button>
-	<Button
-		on:click={() => {
-			send({ type: 'FINISH' });
-		}}
-		disabled={!speaking}
-	>
-		Finish
-	</Button>
-	{#if queued}
-		<Button on:click={() => {}} disabled={speaking} size="sm" variant="ghost">Speak</Button>
-	{/if}
+<div class="m-2 border p-2">
+	<T.H2>Queue</T.H2>
+	<Queue queue={$queue} />
+	<div class="flex space-x-2">
+		<Button
+			variant="secondary"
+			on:click={() => {
+				send({ type: 'JOIN' });
+			}}
+			disabled={queued}
+		>
+			Join
+		</Button>
+		<Button
+			on:click={() => {
+				send({ type: 'LEAVE' });
+			}}
+			variant="destructive"
+			disabled={!queued}
+		>
+			{$isSpeaker ? 'End' : 'Leave'}
+		</Button>
+	</div>
 </div>
 
-<pre>
-	{userId}
-</pre>
-
-<pre>
-	{JSON.stringify($isLive, null, 2)}
-</pre>
+<div class="flex space-x-2">
+	<IsSpeaker isSpeaker={$isSpeaker} />
+	<SpeakerPosition position={$queue.findIndex((person) => person.id === userId)} />
+</div>
 
 <slot />
