@@ -15,15 +15,20 @@
 	const callPageUrl = routes.callPage({
 		roomSlug: String(room?.slug)
 	});
+
+	let key = 0;
+	$: if (data) key++;
 </script>
 
 <NavLayout {currentUrl}>
-	<Banner heading={`Change ${room.name}`} lead={room.description}>
-		<slot slot="actions">
-			<Button size="lg" variant="secondary" href={callPageUrl}>Enter Room</Button>
-		</slot>
-	</Banner>
-	<Box thickness="none">
-		<RoomForm {form} />
-	</Box>
+	{#key key}
+		<Banner heading={`Change ${room.name}`} lead={room.description}>
+			<slot slot="actions">
+				<Button size="lg" variant="secondary" href={callPageUrl}>Enter Room</Button>
+			</slot>
+		</Banner>
+		<Box thickness="none">
+			<RoomForm {form} />
+		</Box>
+	{/key}
 </NavLayout>

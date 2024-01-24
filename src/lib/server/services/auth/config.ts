@@ -8,6 +8,8 @@ import { providers } from './providers';
 
 export const authHandle = SvelteKitAuth({
 	callbacks: {
+		// @ts-ignore
+		// eslint-disable-next-line
 		session: ({ session, user }) => ({
 			...session,
 			user: {

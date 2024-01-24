@@ -14,10 +14,10 @@
 <div
 	class={cn(boxVariants({ padding, thickness, className }), {
 		'border-0 ': pattern === undefined,
-		'border-t-0': !pattern.includes('t'),
-		'border-r-0': !pattern.includes('r'),
-		'border-b-0': !pattern.includes('b'),
-		'border-l-0': !pattern.includes('l')
+		'border-t-0': !pattern?.includes('t'),
+		'border-r-0': !pattern?.includes('r'),
+		'border-b-0': !pattern?.includes('b'),
+		'border-l-0': !pattern?.includes('l')
 	})}
 	{...$$restProps}
 >

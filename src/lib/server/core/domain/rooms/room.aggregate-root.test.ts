@@ -10,8 +10,11 @@ describe('Room', () => {
 
 	beforeEach(() => {
 		const name = RoomName.createWithDefaults().value();
+		const now = new Date();
 		room = Room.create({
 			ownerId: ID.create(),
+			createdAt: now,
+			updatedAt: now,
 			name,
 			status: RoomStatus.createWithDefaults().value(),
 			slug: RoomSlug.createFromName(name).value()
