@@ -6,14 +6,15 @@
 	import { T } from '~ui/typography';
 	export let data: PageData;
 	const room = data?.room;
+	const roomId = room?.id;
 </script>
 
 <svelte:head>
 	<title>{room?.name} / Uninterrupted / Flua</title>
 </svelte:head>
 
-<Call>
-	<header slot="titles">
+<Call {roomId}>
+	<header>
 		<a href={routes.roomsPage()} class="flex items-center">
 			<I.ArrowLeft class="inline" />Rooms
 		</a>

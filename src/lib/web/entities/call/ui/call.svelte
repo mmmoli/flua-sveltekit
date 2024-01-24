@@ -1,47 +1,49 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+	import { Button } from '~ui/button';
+	import { joinQueue } from '../api/join-queue';
+	import { leaveQueue } from '../api/leave-queue';
+	import { mute } from '../api/mute';
+	import { unmute } from '../api/unmute';
 	import { callMachine } from '../model/call-machine';
 	import { useMachine } from '@xstate/svelte';
-	import { I } from '~ui/icons';
-	import { T } from '~ui/typography';
-	import { Button } from '~ui/button';
-	import { Box } from '~ui/box';
+	import { roomStore } from '~shared/services/realtime/lib/room-store';
+	import { get } from 'svelte/store';
+	import { useQueue } from '../model/use-queue';
+	import { useOthers, useSelf } from '~shared/services/realtime';
 
-	const { send, snapshot: state } = useMachine(callMachine);
+	const room = get(roomStore);
+	const me = useSelf();
+	const others = useOthers();
+	const { queue, userIdIsLive } = useQueue(others, me);
 
-	interface Metadata {
-		label?: string;
+	$: userId = $page.data.session?.user?.id;
+
+	$: isLive = userIdIsLive(userId);
+
+	const connectedMachine = callMachine.provide({
+		actions: {
+			join: () => joinQueue(room),
+			leave: () => leaveQueue(room),
+			mute,
+			unmute
+		}
+	});
+	const { send, snapshot } = useMachine(connectedMachine);
+
+	$: queued = $snapshot.tags.has('queued');
+	$: speaking = $snapshot.tags.has('speaking');
+
+	$: {
+		if (isLive) {
+			console.log('is live');
+			send({ type: 'SPEAK' });
+		} else {
+			console.log('is not');
+			send({ type: 'FINISH' });
+		}
 	}
-
-	$: queued = $state.tags.has('queued');
-	$: speaking = $state.tags.has('speaking');
-	$: changing = $state.tags.has('changing');
-
-	$: metadata = Object.keys($state.getMeta()).reduce((acc, key) => {
-		const value = $state.getMeta()[key];
-		return Object.assign(acc, value);
-	}, {}) as Metadata;
-
-	// function handleKeydown(evt: KeyboardEvent) {
-	// 	if (evt.code !== 'Space') return;
-	// 	$state.matches('queue') ? send({ type: 'JOIN' }) : send({ type: 'LEAVE' });
-	// }
 </script>
-
-<!-- <svelte:window on:keydown={handleKeydown} /> -->
-
-<Box thickness="none" class="flex-row flex-wrap">
-	<div class="aspect-video w-full bg-foreground md:w-2/3" />
-	<Box thickness="none" class="w-full md:w-1/3">
-		<slot name="titles" />
-	</Box>
-</Box>
-
-<div class="flex items-center space-x-2">
-	<T.Lead>You&apos;re {metadata.label}</T.Lead>
-	{#if changing}
-		<I.Loader class="mr-2 h-4 w-4 animate-spin" />
-	{/if}
-</div>
 
 <div class="flex space-x-2">
 	<Button
@@ -69,15 +71,16 @@
 		Finish
 	</Button>
 	{#if queued}
-		<Button
-			on:click={() => {
-				send({ type: 'SPEAK' });
-			}}
-			disabled={speaking}
-			size="sm"
-			variant="ghost"
-		>
-			Speak
-		</Button>
+		<Button on:click={() => {}} disabled={speaking} size="sm" variant="ghost">Speak</Button>
 	{/if}
 </div>
+
+<pre>
+	{userId}
+</pre>
+
+<pre>
+	{JSON.stringify($isLive, null, 2)}
+</pre>
+
+<slot />

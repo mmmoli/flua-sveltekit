@@ -53,6 +53,8 @@
 		"@auth/drizzle-adapter": "^0.3.12",
 		"@auth/sveltekit": "^0.5.2",
 		"@fontsource-variable/overpass-mono": "^5.0.16",
+		"@liveblocks/client": "^1.9.7",
+		"@liveblocks/node": "^1.9.7",
 		"@neondatabase/serverless": "^0.6.1",
 		"@vercel/analytics": "^1.1.1",
 		"@xstate/svelte": "^3.0.2",

@@ -6,6 +6,8 @@ export const config = {
 	runtime: 'edge'
 };
 
+export const ssr = false;
+
 export const load: PageServerLoad = async (event) => {
 	const userId = await userIdOrRedirect(event.locals);
 

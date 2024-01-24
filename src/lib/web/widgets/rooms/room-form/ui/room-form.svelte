@@ -1,60 +1,47 @@
 <script lang="ts">
-	import { Input } from '~ui/input';
 	import { toast } from 'svelte-sonner';
 	import { roomFormSchema } from '../model/form-schema';
 	import { superForm } from 'sveltekit-superforms/client';
 	import type { SuperValidated } from 'sveltekit-superforms';
-	import { Button } from '~ui/button';
+
+	import * as Form from '~ui/form';
 	import { actionKey } from '../lib/action-key';
 	export let form: SuperValidated<typeof roomFormSchema>;
-	let processing = false;
-	const {
-		form: formData,
-		errors,
-		constraints,
-		enhance
-	} = superForm(form, {
-		onSubmit: () => {
-			processing = true;
-		},
+
+	const { form: formData, submitting } = superForm(form, {
 		onUpdate: () => {
-			processing = false;
 			toast.success('Le done!');
 		}
 	});
 </script>
 
-<form method="POST" action={`?/${actionKey}`} use:enhance>
-	<input type="hidden" name="id" bind:value={$formData.id} />
-	<label for="name">Name</label>
-	<Input
-		type="text"
-		placeholder="name"
-		aria-invalid={$errors.name ? 'true' : undefined}
-		class="max-w-xs"
-		name="name"
-		{...$constraints.name}
-		bind:value={$formData.name}
-	/>
-	{#if $errors.name}<span class="invalid">{$errors.name}</span>{/if}
+<Form.Root
+	{form}
+	action={`?/${actionKey}`}
+	class="w-2/3 space-y-6"
+	let:config
+	method="POST"
+	schema={roomFormSchema}
+>
+	<Form.Field {config} name="id">
+		<input type="hidden" name="id" bind:value={$formData.id} />
+	</Form.Field>
 
-	<label for="name">Description</label>
-	<Input
-		type="text"
-		placeholder="description"
-		aria-invalid={$errors.description ? 'true' : undefined}
-		class="max-w-xs"
-		name="description"
-		{...$constraints.description}
-		bind:value={$formData.description}
-	/>
-	{#if $errors.description}<span class="invalid">{$errors.description}</span>{/if}
+	<Form.Field {config} name="name">
+		<Form.Item>
+			<Form.Label>Name</Form.Label>
+			<Form.Input />
+			<Form.Description>What do you want to call this room?</Form.Description>
+			<Form.Validation />
+		</Form.Item>
+	</Form.Field>
 
-	<div><Button disabled={processing} variant="secondary" type="submit">Submit</Button></div>
-</form>
-
-<style>
-	.invalid {
-		color: red;
-	}
-</style>
+	<Form.Field {config} name="description">
+		<Form.Item>
+			<Form.Label>Description</Form.Label>
+			<Form.Input />
+			<Form.Validation />
+		</Form.Item>
+	</Form.Field>
+	<Form.Button variant="secondary" disabled={$submitting}>Submit</Form.Button>
+</Form.Root>

@@ -1,7 +1,7 @@
 import { fail, type Actions, type RequestEvent } from '@sveltejs/kit';
 import { superValidate } from 'sveltekit-superforms/client';
 import { roomFormSchema } from '../model/form-schema';
-import { changeRoomDetailsCommand } from '~commands/change-room-details';
+import { changeRoomDetailsCommand } from '~commands/rooms/change-room-details';
 import { userIdOrRedirect } from '~shared/utils/auth/user-id-or-redirect';
 import { actionKey } from '../lib/action-key';
 

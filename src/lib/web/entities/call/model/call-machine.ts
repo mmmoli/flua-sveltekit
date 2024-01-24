@@ -1,4 +1,4 @@
-import { fromPromise, setup } from 'xstate';
+import { setup } from 'xstate';
 
 export type ParticipantEvent =
 	| { type: 'JOIN' }
@@ -6,18 +6,7 @@ export type ParticipantEvent =
 	| { type: 'FINISH' }
 	| { type: 'SPEAK' };
 
-export interface Room {
-	name: string;
-	slug: string;
-}
-
-export type CallContext = {
-	readonly room: Room;
-};
-
-export type Action = {
-	readonly room: Room;
-};
+export type CallContext = {};
 
 export const callMachine = setup({
 	types: {} as {
@@ -37,136 +26,84 @@ export const callMachine = setup({
 		leave: () => {
 			console.warn('leave not implemented');
 		}
-	},
-	actors: {
-		joinRoom: fromPromise(async () => {
-			console.warn('joinRoom not implemented');
-			const room = Promise.resolve();
-			return room;
-		})
 	}
 }).createMachine({
 	id: 'call',
-	initial: 'preparing',
-	context: {
-		room: {
-			name: 'fake-room-name',
-			slug: 'fake-room-slug'
-		}
-	},
+	initial: 'idle',
+	context: {},
 	states: {
-		preparing: {
+		idle: {
 			meta: {
-				label: 'Preparing'
+				label: '🥱 Just listening'
 			},
-			invoke: {
-				src: 'joinRoom',
-				onDone: [
-					{
-						target: 'queue'
-					}
-				],
-				onError: [
-					{
-						target: 'errored'
-					}
-				]
+			on: {
+				JOIN: {
+					target: 'joining'
+				}
 			}
 		},
-		errored: {
+		joining: {
 			meta: {
-				label: 'Fail'
+				label: '🙋 Joining'
 			},
-			type: 'final'
+			entry: {
+				type: 'join'
+			},
+			after: {
+				'800': [
+					{
+						target: '#call.queueing',
+						actions: []
+					}
+				]
+			},
+			tags: ['queued', 'changing']
 		},
-		queue: {
-			initial: 'preparing',
-			states: {
-				preparing: {
-					meta: {
-						label: 'Preparing'
-					},
-					entry: {
-						type: 'mute'
-					},
-					always: {
-						target: 'idle'
+		queueing: {
+			meta: {
+				label: '🧘 Queued'
+			},
+			tags: 'queued',
+			on: {
+				LEAVE: {
+					target: 'leaving'
+				},
+				SPEAK: {
+					target: 'speaking'
+				}
+			}
+		},
+		leaving: {
+			meta: {
+				label: '✌️ Leaving'
+			},
+			entry: {
+				type: 'leave'
+			},
+			after: {
+				'800': [
+					{
+						target: '#call.idle',
+						actions: []
 					}
-				},
-				idle: {
-					meta: {
-						label: '🥱 Just listening'
-					},
-					on: {
-						JOIN: {
-							target: 'joining'
-						}
-					}
-				},
-				joining: {
-					meta: {
-						label: '🙋 Joining'
-					},
-					entry: {
-						type: 'join'
-					},
-					after: {
-						'800': [
-							{
-								target: '#call.queue.queueing',
-								actions: []
-							}
-						]
-					},
-					tags: ['queued', 'changing']
-				},
-				queueing: {
-					meta: {
-						label: '🧘 Queued'
-					},
-					tags: 'queued',
-					on: {
-						LEAVE: {
-							target: 'leaving'
-						},
-						SPEAK: {
-							target: 'speaking'
-						}
-					}
-				},
-				leaving: {
-					meta: {
-						label: '✌️ Leaving'
-					},
-					entry: {
-						type: 'leave'
-					},
-					after: {
-						'800': [
-							{
-								target: '#call.queue.idle',
-								actions: []
-							}
-						]
-					},
-					tags: 'changing'
-				},
-				speaking: {
-					meta: {
-						label: '💬 Speaking'
-					},
-					entry: {
-						type: 'unmute'
-					},
-					exit: {
-						type: 'mute'
-					},
-					tags: ['queued', 'speaking'],
-					on: {
-						FINISH: {
-							target: 'leaving'
-						}
-					}
+				]
+			},
+			tags: 'changing'
+		},
+		speaking: {
+			meta: {
+				label: '💬 Speaking'
+			},
+			entry: {
+				type: 'unmute'
+			},
+			exit: {
+				type: 'mute'
+			},
+			tags: ['queued', 'speaking'],
+			on: {
+				FINISH: {
+					target: 'leaving'
 				}
 			}
 		}

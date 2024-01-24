@@ -6,4 +6,5 @@ export const roomFormSchema = z.object({
 	id: z.string()
 });
 
-export type RoomFormValues = z.infer<typeof roomFormSchema>;
+export type RoomFormSchema = typeof roomFormSchema;
+export type RoomFormValues = z.infer<RoomFormSchema>;

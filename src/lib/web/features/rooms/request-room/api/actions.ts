@@ -1,5 +1,5 @@
 import { type RequestEvent, fail, redirect } from '@sveltejs/kit';
-import { requestRoomCommand } from '~commands/request-room';
+import { requestRoomCommand } from '~commands/rooms/request-room';
 import { routes } from '~shared/config/routes';
 import { userIdOrRedirect } from '~shared/utils/auth/user-id-or-redirect';
 

@@ -10,5 +10,6 @@
 	{/if}
 	<Button variant="ghost" on:click={() => signOut()} class="button">Sign out</Button>
 {:else}
-	<Button on:click={() => signIn('github')}>Sign In</Button>
+	<Button on:click={() => signIn('github')}>Sign In (GH)</Button>
+	<Button on:click={() => signIn('google')}>Sign In (GO)</Button>
 {/if}
