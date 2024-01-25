@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getCurrentUserIsSpeaker } from '~entities/call';
+	import { getCurrentUserIsSpeaker } from '~entities/queue';
 	import { Badge } from '~ui/badge';
 	const isSpeaker = getCurrentUserIsSpeaker();
 </script>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getQueuePosition } from '~entities/call';
+	import { getQueuePosition } from '~entities/queue';
 	import { Badge } from '~ui/badge';
 	const position = getQueuePosition();
 </script>

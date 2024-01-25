@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Empty from './empty.svelte';
 	import QueueItem from './queue-item.svelte';
-	import { getQueue } from '~entities/call';
+	import { getQueue } from '~entities/queue';
 	const queue = getQueue();
 </script>
 

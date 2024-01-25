@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from 'svelte';
-	import { type Controls, getCurrentUserIsQueued } from '~entities/call';
+	import { type Controls, getCurrentUserIsQueued } from '~entities/queue';
 	import { Button } from '~ui/button';
 	const { join, leave } = getContext<Controls>('controls');
 	const isQueued = getCurrentUserIsQueued();

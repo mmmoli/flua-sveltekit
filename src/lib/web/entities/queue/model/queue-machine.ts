@@ -6,7 +6,7 @@ export type ParticipantEvent =
 	| { type: 'FINISH' }
 	| { type: 'SPEAK' };
 
-export const callMachine = setup({
+export const queueMachine = setup({
 	types: {} as {
 		events: ParticipantEvent;
 	},
@@ -25,7 +25,7 @@ export const callMachine = setup({
 		}
 	}
 }).createMachine({
-	id: 'call',
+	id: 'queue',
 	initial: 'idle',
 	states: {
 		idle: {
@@ -48,7 +48,7 @@ export const callMachine = setup({
 			after: {
 				'800': [
 					{
-						target: '#call.queueing',
+						target: '#queue.queueing',
 						actions: []
 					}
 				]
@@ -79,7 +79,7 @@ export const callMachine = setup({
 			after: {
 				'800': [
 					{
-						target: '#call.idle',
+						target: '#queue.idle',
 						actions: []
 					}
 				]

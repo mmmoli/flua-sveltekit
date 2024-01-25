@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { callMachine } from '../model/call-machine';
+	import { queueMachine } from '../model/queue-machine';
 	import { get } from 'svelte/store';
 	import { joinQueue } from '../api/join-queue';
 	import { leaveQueue } from '../api/leave-queue';
@@ -14,7 +14,7 @@
 	const room = get(roomStore);
 	const { currentUserIsSpeaker: isSpeaker } = useQueue(useOthers(), useSelf());
 
-	const connectedMachine = callMachine.provide({
+	const connectedMachine = queueMachine.provide({
 		actions: {
 			join: () => joinQueue(room),
 			leave: () => leaveQueue(room),
@@ -40,9 +40,4 @@
 	}
 </script>
 
-<div class="flex">
-	<slot name="call-video" />
-	<slot name="call-titles" />
-</div>
-
-<slot name="call-queue" />
+<slot />
