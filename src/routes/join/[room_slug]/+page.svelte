@@ -5,7 +5,7 @@
 	import { Call } from '~entities/call';
 	import { routes } from '~shared/config/routes';
 	import { Button } from '~ui/button';
-	import { QueueActions } from '~features/calls/queue-actions';
+	import { QueueWidget } from '~widgets/calls/queue-widget';
 	export let data: PageData;
 	const room = data?.room;
 	const roomId = room?.id;
@@ -27,5 +27,5 @@
 		<T.Lead>{room?.description}</T.Lead>
 	</header>
 
-	<svelte:fragment slot="call-queue"><QueueActions /></svelte:fragment>
+	<svelte:fragment slot="call-queue"><QueueWidget /></svelte:fragment>
 </Call>

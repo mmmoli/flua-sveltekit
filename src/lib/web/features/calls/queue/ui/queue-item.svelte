@@ -11,7 +11,7 @@
 </script>
 
 {#if isMe(person)}
-	Me
+	<strong>Me</strong>
 {:else}
 	{String(person.info?.name)}
 {/if}

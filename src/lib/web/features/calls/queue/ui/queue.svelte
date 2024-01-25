@@ -1,18 +1,18 @@
 <script lang="ts">
-	import type { FluaRealtimeUser } from '~shared/services/realtime';
+	import Empty from './empty.svelte';
 	import QueueItem from './queue-item.svelte';
-
-	export let queue: Readonly<FluaRealtimeUser>[];
+	import { getQueue } from '~entities/call';
+	const queue = getQueue();
 </script>
 
 <!-- If empty, display message. Else display this list -->
 
-{#if queue.length === 0}
-	<p>No one here. Join to become speaker. Snooze-ya-loose</p>
+{#if $queue.length === 0}
+	<Empty />
 {:else}
 	<div>
 		<ol class="queue flex list-none ps-0">
-			{#each queue as person}
+			{#each $queue as person}
 				<li class="queued-person on">
 					<QueueItem {person} />
 				</li>
