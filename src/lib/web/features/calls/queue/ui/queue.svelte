@@ -5,8 +5,6 @@
 	const queue = getQueue();
 </script>
 
-<!-- If empty, display message. Else display this list -->
-
 {#if $queue.length === 0}
 	<Empty />
 {:else}
