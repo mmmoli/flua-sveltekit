@@ -23,7 +23,7 @@ const boxVariants = tv({
 type Thickness = VariantProps<typeof boxVariants>['thickness'];
 type Padding = VariantProps<typeof boxVariants>['padding'];
 
-type BoxPatterns = 'trbl' | 't' | 'r' | 'b' | 'l' | 'trl' | 'brl';
+type BoxPatterns = 'trbl' | 't' | 'r' | 'b' | 'l' | 'trl' | 'brl' | '';
 
 type Props = {
 	thickness?: Thickness;
