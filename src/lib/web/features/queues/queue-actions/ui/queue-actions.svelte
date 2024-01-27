@@ -6,7 +6,8 @@
 	const isQueued = getCurrentUserIsQueued();
 </script>
 
-<div class="flex space-x-2">
-	<Button variant="ghost" size="sm" on:click={join} disabled={$isQueued}>Join</Button>
-	<Button variant="ghost" size="sm" on:click={leave} disabled={!$isQueued}>Leave</Button>
-</div>
+{#if $isQueued}
+	<Button class="block" variant="destructive" size="lg" on:click={leave}>Leave</Button>
+{:else}
+	<Button class="block" variant="secondary" size="lg" on:click={join}>Join</Button>
+{/if}

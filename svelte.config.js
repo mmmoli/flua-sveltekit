@@ -8,7 +8,9 @@ const config = {
 	preprocess: [vitePreprocess({})],
 
 	kit: {
-		adapter: adapter({}),
+		adapter: adapter({
+			runtime: 'nodejs18.x'
+		}),
 		alias: {
 			'~ui/*': 'src/lib/web/shared/design-system/ui/*',
 			'~shared/*': 'src/lib/web/shared/*',

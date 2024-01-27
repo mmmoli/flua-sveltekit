@@ -4,10 +4,6 @@ import { type Actions } from '@sveltejs/kit';
 import { userIdOrRedirect } from '~shared/utils/auth/user-id-or-redirect';
 import type { PageServerLoad } from '../dash/$types';
 
-export const config = {
-	runtime: 'edge'
-};
-
 export const load: PageServerLoad = async (event) => {
 	const userId = await userIdOrRedirect(event.locals);
 

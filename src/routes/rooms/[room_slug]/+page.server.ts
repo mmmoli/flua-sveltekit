@@ -5,10 +5,6 @@ import { userIdOrRedirect } from '~shared/utils/auth/user-id-or-redirect';
 import { type Actions } from '@sveltejs/kit';
 import { actions as roomFormActions } from '~widgets/rooms/room-form/api';
 
-export const config = {
-	runtime: 'edge'
-};
-
 export const load: PageServerLoad = async (event) => {
 	const userId = await userIdOrRedirect(event.locals);
 

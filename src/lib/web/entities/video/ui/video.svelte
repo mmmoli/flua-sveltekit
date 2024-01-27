@@ -1,3 +1,3 @@
-<div class="aspect-video bg-foreground p-3 text-background">
+<div class="bg-foreground text-background aspect-video p-3">
 	<slot />
 </div>

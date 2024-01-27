@@ -5,7 +5,11 @@
 </script>
 
 {#if $position > 0}
-	<Badge variant="secondary">
-		<slot>Position: {$position}</slot>
-	</Badge>
+	<slot position={$position}>
+		<Badge variant="secondary">
+			<slot>Position: {$position}</slot>
+		</Badge>
+	</slot>
+{:else}
+	<slot name="not-queued" />
 {/if}

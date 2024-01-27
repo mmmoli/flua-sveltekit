@@ -2,10 +2,6 @@ import type { PageServerLoad } from '../../join/[room_slug]/$types';
 import { userIdOrRedirect } from '~shared/utils/auth/user-id-or-redirect';
 import { loadRoomSSR } from '~entities/room/api/load-room';
 
-export const config = {
-	runtime: 'edge'
-};
-
 export const ssr = false;
 
 export const load: PageServerLoad = async (event) => {
